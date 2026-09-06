@@ -29,7 +29,7 @@ run the application of your choice as shown in the example for your platform abo
 <h2>versions</h2>
 
 <p>
-help-&gt;about, from any Panopset desktop application, will give you the <a href="https://github.com/panopset/${GN}/blob/main/docs/vh.md">version</a>.
+help-&gt;about, from any Panopset desktop application, will give you the <a href="https://github.com/${GN}/blob/main/docs/vh.md">version</a>.
 </p>
 
 </div>
