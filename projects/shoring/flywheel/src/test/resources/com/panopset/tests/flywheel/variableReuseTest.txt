@@ -1,0 +1,1 @@
+${@f variableReuseResult.txt}${@p foo}bar${@q}${@p foo}bat${@q}${foo}

@@ -1,0 +1,2 @@
+${@f variableReuse1Throwaway.txt}${@p ispwd}hotel${@q}${@t variableReuse1secondaryTmplt.txt}
+${@f variableReuse1Result.txt}${@p ispwd}bravo${@q}${@t variableReuse1secondaryTmplt.txt}

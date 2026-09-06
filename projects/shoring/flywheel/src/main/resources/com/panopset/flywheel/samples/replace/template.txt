@@ -1,0 +1,1 @@
+${@p replaceme}textToReplaceWithCommandPrefix${@q}${@p pfx}${@${@q}${@r replaceme}${pfx}${@q}${l}

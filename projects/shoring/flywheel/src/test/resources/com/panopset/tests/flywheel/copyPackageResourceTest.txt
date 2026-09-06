@@ -1,0 +1,2 @@
+${@p panopsetIcon}/com/panopset/centralen/resource/panopset16x16.png${@q}
+${@e com.panopset.flywheel.copyPackageResource(panopsetIcon,favicon)}

@@ -1,0 +1,5 @@
+${@p tmplt}deepList.txt${@q}
+${@p com.panopset.flywheel.tokens},${@q}
+${@f variableNamedListResult.txt}${@l @tmplt}
+${1} ${2}
+${@t deepListTest02.txt}${@q}

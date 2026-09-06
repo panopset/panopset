@@ -1,0 +1,177 @@
+<div class="mainfc">
+
+    <div id="nzr_main_000" class="dsrow">
+        <button onclick="showHelp()">Help</button>
+        <button onclick="showConfig()">Config</button>
+        <button onclick="clearAllFields()">Clear</button>
+        <button onClick="unscramble()">Unscramble</button>
+        <button onClick="scramble()">Scramble</button>
+        <label>
+            &nbsp;Passphrase:&nbsp;
+        </label>
+        <input id="passphrase" class="dsflex1" type="password" name="passphrase"/>
+        <label for="showPwdCB"><input id="showPwdCB" value="showPwd" onchange="refreshShowPwd()" type="checkbox">Show.</label>
+    </div>
+
+    <div id="nzr_errors" class="nzr_row dsalert">
+ <label class="nzr_redalert" id="nzr_error"></label>
+</div>
+
+    <div id="nzr_main_001" class="dsmain">
+        <textarea id="mainText" class="dsfill"></textarea>
+    </div>
+
+    <div id="nzr_config" class="dsline">
+        <div class="nzr_row">
+            <button onClick="config_ok()">OK</button>
+            <button onClick="config_reset()">Reset</button>
+        </div>
+        <div class="nzr_row">
+            <label>
+                Key obtention iterations:
+            </label>
+            <input type="text" id="nzr_koi" value="10000"/>
+        </div>
+    </div>
+
+    <div id="nzr_help" class="inset">
+        <div>
+            <button onclick="showMain()">Got it!</button>
+        </div>
+        <div class="bodyborder">
+            <header>
+                <p>Your unencrypted text is sent to a Panopset secured server over https. That text is then
+                    scrambled using
+                    standard open source encryption algorithms, in memory. The result is then passed back in the
+                    https REST response and
+                    presented on this web page. Your raw text is not copied and stored anywhere.
+                    It is not best practices to trust the prior statement, so a safer thing for you to do
+                    would be to download the application, and run it on your PC. The absolute safest thing to do
+                    would be to build the application
+                    from source, so you could verify that your unencrypted text is not stored anywhere.</p>
+            </header>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+ function refreshShowPwd() {
+  if ($('#showPwdCB').is(':checked')) {
+   $('#passphrase').prop('type', 'text')
+  } else {
+   $('#passphrase').prop('type', 'password')
+   //$('#passphrase').type = 'text'
+    //document.getElementById('passphrase').type = 'text';
+  }
+ }
+
+ var dft_koi = '10000';
+ var koi = dft_koi;
+
+ $(document).ready(function () {
+  showMain();
+ });
+
+ function config_ok() {
+  koi = $('#nzr_koi').val();
+  showMain();
+ }
+
+ function config_reset() {
+  $('#nzr_koi').val(dft_koi);
+ }
+
+ function clearAllFields() {
+  $('#mainText').val('');
+  $('#passphrase').val('');
+  showMain();
+ }
+
+ function scramble() {
+  $('#nzr_errors').val('');
+  $('#nzr_errors').hide();
+  var sci = {}
+  sci["text"] = $("#mainText").val();
+  sci["koi"] = koi;
+  sci["passphrase"] = $("#passphrase").val();
+  $.ajax({
+   type: "POST",
+   contentType: "application/json",
+   url: "/beam/scramble",
+   data: JSON.stringify(sci),
+   cache: false,
+   timeout: 10000,
+   success: function(data) {
+    $('#mainText').val(data)
+   },
+   error: function (j, e) {
+    showErrors(j, e);
+   }
+  });
+ }
+
+ function unscramble() {
+  $('#nzr_errors').val('');
+  $('#nzr_errors').hide();
+  var sci = {}
+  sci["text"] = $("#mainText").val();
+  sci["koi"] = koi;
+  sci["passphrase"] = $("#passphrase").val();
+  $.ajax({
+   type: "POST",
+   contentType: "application/json",
+   url: "/beam/unscramble",
+   data: JSON.stringify(sci),
+   cache: false,
+   timeout: 10000,
+   success: function(data) {
+    $('#mainText').val(data)
+   },
+   error: function (j, e) {
+    showErrors(j, e);
+   }
+  });
+ } 
+
+ function showErrors(j, e) {
+  msg = formatErrors(j, e);
+  $('#nzr_error').html(msg);
+  $('#nzr_errors').show();
+  $('#nzr_help').hide();
+  $('#nzr_config').hide();
+  $('#nzr_main_000').show();
+  $('#nzr_main_001').show();
+ }
+
+ 
+ function showMain() {
+  $('#nzr_errors').hide();
+  $('#nzr_help').hide();
+  $('#nzr_config').hide();
+  $('#nzr_main_000').show();
+  $('#nzr_main_001').show();
+  refreshShowPwd();
+ }
+ 
+ function showHelp() {
+  $('#nzr_errors').hide();
+  $('#nzr_main_000').hide();
+  $('#nzr_main_001').hide();
+  $('#nzr_config').hide();
+  $('#nzr_help').show();
+ }
+ 
+ function showConfig() {
+  $('#nzr_errors').hide();
+  $('#nzr_koi').val(koi);
+  $('#nzr_help').hide();
+  $('#nzr_main_000').hide();
+  $('#nzr_main_001').hide();
+  $('#nzr_config').show();
+ }
+
+
+
+</script>

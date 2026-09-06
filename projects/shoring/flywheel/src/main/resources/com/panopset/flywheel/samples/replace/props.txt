@@ -1,0 +1,3 @@
+desc=Replace
+lineBreaks=true
+listBreaks=false

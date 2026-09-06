@@ -1,0 +1,1 @@
+${@p sudo}alpha ${ispwd} charlie ${@q}${sudo}delta

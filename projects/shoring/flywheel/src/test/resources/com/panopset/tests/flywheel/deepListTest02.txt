@@ -1,0 +1,3 @@
+zango${@l deepList.txt}${@t deepListTest03.txt}${@q}
+bango
+

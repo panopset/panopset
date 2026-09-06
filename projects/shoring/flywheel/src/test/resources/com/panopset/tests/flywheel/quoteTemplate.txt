@@ -1,0 +1,5 @@
+<tr><td>
+<b>${quote}</b>
+</td><td width="10">&nbsp;</td><td>
+<i>${author}</i>
+</td></tr>

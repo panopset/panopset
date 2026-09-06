@@ -1,0 +1,3 @@
+In this example, we use the replace command, textToReplaceWithCommandPrefixr replaceme}, 
+to show how to escape template commands.  Rare that you'd ever need to do that, but showing
+it here as a demo of the replace, push, quit, and variable commands.

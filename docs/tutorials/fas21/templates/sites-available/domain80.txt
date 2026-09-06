@@ -1,0 +1,14 @@
+${@p DP}${user.home}/Documents/panopset/dev.properties${@q}${@m DP}${@p your_domain}${SITE_FAS21}${@q}${@p FN}${your_domain}${@q}${@f FN}server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/${your_domain}/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name ${your_domain} www.${your_domain};
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+

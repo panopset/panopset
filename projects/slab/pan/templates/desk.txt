@@ -1,0 +1,57 @@
+<script>
+ function isWindows() {
+  return navigator.platform.toLowerCase().indexOf('win') > -1
+ }
+</script>
+
+
+<div class="inset">
+
+<h1>Desktop Applications</h1>
+
+<p>
+Panopset desktop applications (listed on the Panopset <a href="/home">home</a> page) may be run in as many ways that exist, to run
+Java applications. They may be run...
+</p>
+
+<h2>As a desktop application</h2>
+<p>
+This is the best way, for most people.  You may either...
+</p>
+<ul><li>
+<a href="/downloads.html">Download</a> and install the Panopset desktop applications installer for your platform.
+</li><li>
+<a href="/build.html">Build</a> your own Panopset desktop applications installer, for your personal computer.
+</li></ul>
+<p>
+Once installed, you will have launchers for each desktop application. See the <a href="/downloads.html">downloads</a>
+page, for the path for your system. Then, add that path to your system path. On Linux Mint systems, for example, that
+would mean adding it to your ~/.profile file and rebooting, something like this (which in my case also includes flutter):
+
+    PATH="~/apps/flutter/bin:$PATH:/opt/panopset/bin"
+
+</p>
+
+
+<h2>As a maven/gradle dependency</h2>
+<pre>
+git clone https://github.com/panopset/src.git
+cd <span>pan/shoring</span>
+mvn install
+</pre>
+<p>
+The above instructions will place all the Panopset maven projects in your local repository, making them
+available to your maven and/or gradle projects.
+</p>
+<h2>As any other kind of Java dependency</h2>
+<p>Since it is open <a href="https://github.com/panopset/src">source</a>, you can do almost anything
+you like with it except publish something that utilizes a closed source enhancement.
+</p>
+
+</li>
+</ul>
+<p>See the Panopset <a href="https://github.com/panopset/${GN}/blob/main/LICENSE">license</a> for details.</p>
+
+
+</div>
+

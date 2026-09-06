@@ -1,0 +1,11 @@
+<div class="inset">
+
+
+<form action="/beam/hd">
+<input type="password" name="pw"/>
+<input type="submit" value="download"/>
+</form>
+
+
+</div>
+

@@ -1,0 +1,1 @@
+${@e check4match(foo,w0,text or variable if they match,text or variable if they don't match)}

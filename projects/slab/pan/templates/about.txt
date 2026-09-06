@@ -1,0 +1,24 @@
+<div class="inset">
+
+<h1>Privacy Policy</h1>
+<p>
+While using the tools available on this site, information that you enter into fields is 100% transmitted
+through <a href="https://letsencrypt.org/">letsencrypt</a> secured https, and processed in server
+memory only for the purpose of your immediate data processing cycle.  That information is not
+stored anywhere.  When using Panopset desktop applications, nothing is transmitted outbound behind the scenes, except
+a request for version information, from the server to your application, so that it may flag you if you need an
+upgrade.  All other Panopset desktop software processing is done using web traffic and files that you select, and in
+local RAM. All of this is <a href="https://github.com/panopset/src">open source</a>, allowing for easy verification.
+</p>
+
+<h2>Documentation</h2>
+
+    <p>See the Panopset <a href="https://github.com/panopset/src">source code</a>,
+        for a list of Panopset manuals, including use case samples.</p>
+
+
+<h1>Contact</h1>
+<ul><li>
+<a href="https://www.linkedin.com/in/karldinwiddie/">Karl Dinwiddie</a>, <a href="mailto:karl@panopset.com"><b>CEO</b></a> and founder.
+</li></ul>
+</div>

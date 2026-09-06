@@ -1,0 +1,133 @@
+:root {
+    --bgd000: #000;
+    --bgd001: #234;
+    --bgd002: #110;
+    --fgd000: #cff;
+    --fgd001: #9df;
+    --fgd002: #fff;
+}
+
+html {
+ background-color: var(--bgd002)
+}
+body {
+ background-color: var(--bgd000);
+ color: var(--fgd000);
+ margin: 0px;
+ padding: 0px;
+ font-size: x-large;
+}
+
+div.inset {
+ margin: 1em;
+ font-size: large;
+}
+
+a:link {
+ color: var(--fgd001);
+ text-decoration: none;
+}
+
+a:visited {
+ color: var(--fgd001);
+}
+
+a:hover {
+ color: var(--fgd002);
+}
+
+a:active {
+ color: var(--fgd001);
+}
+
+/* ************************** */
+/* navbar inspired by https://css-tricks.com/solved-with-css-dropdown-menus/ */
+/* ************************** */
+
+.menuSeparator {
+ width: 1px;
+ height: 32px;
+ background: var(--bgd000);
+}
+
+nav.menuBar a {
+ display: block;
+ height: 100%;
+ text-decoration: var(--fgd001);
+ font-variant: small-caps;
+}
+
+nav.menuBar li {
+ color: var(--fgd001);
+ float: left;
+ position: relative;
+}
+
+nav.menuBar ul {
+ list-style: none;
+ margin: 0;
+ padding-left: 0;
+}
+
+nav.menuBar li:hover {
+ background: var(--bgd001);
+ cursor: pointer;
+}
+
+nav.menuBar ul li ul {
+ background: var(--bgd001);
+ visibility: hidden;
+ opacity: 0;
+ min-width: 25rem;
+ position: absolute;
+ transition: all 0.5s ease;
+ left: 0;
+ display: none;
+ padding: 0px;
+}
+
+nav.menuBar ul li:hover > ul,
+ul li ul:hover {
+ visibility: visible;
+ opacity: 1;
+ display: block;
+}
+nav.menuBar ul li ul li {
+ clear: both;
+ width: 100%;
+}
+
+nav.menuBar ul li ul li ul li{
+ margin-left: 5rem;
+ margin-top: -50px;
+}
+
+.menuBar {
+ background: var(--bgd001);
+ height: 32px
+}
+
+.linkDown span {
+ display: inline-block;
+ transform: rotate(90deg);
+}
+
+.pad0 {
+ padding: 0px;
+ height: 32px;
+}
+
+.padLeft {
+ padding: 0px 10px 0px 10px;
+ height: 32px;
+}
+
+#clock {
+ font-family: sans-serif;
+}
+
+#bnr0 {
+ background-color: var(--bgd000);
+ color: var(--fgd000);
+ height: 32px;
+}

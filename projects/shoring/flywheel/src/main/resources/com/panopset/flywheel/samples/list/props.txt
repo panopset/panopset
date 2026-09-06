@@ -1,0 +1,3 @@
+desc=Variable
+lineBreaks=false
+listBreaks=false

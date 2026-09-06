@@ -1,0 +1,11 @@
+<div class="inset">
+
+<p>Panopset module Kotlin documentation</p>
+<ul>
+${@l modules.txt}
+<li><a href="/dox/${1}/index.html">${1}</a></li>
+${@q}
+</ul>
+
+
+</div>

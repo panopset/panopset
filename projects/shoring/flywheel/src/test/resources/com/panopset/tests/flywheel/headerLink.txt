@@ -1,0 +1,7 @@
+${@p link_this}
+<div class="inactive">&nbsp;${hnm}&nbsp;</div>
+${@q}
+${@p link_that}
+<a href="${relpath}${hrf}" class="menu">&nbsp;${hnm}&nbsp;</a>
+${@q}
+${@e check4match(fileName,hrf,link_this,link_that)}

@@ -1,0 +1,2 @@
+${@f variableReuse2Throwaway.txt}${@p ispwd}green${@q}${@t variableReuse2secondaryTmplt.txt}
+${@f variableReuse2Result.txt}${@p ispwd}blue${@q}${@t variableReuse2secondaryTmplt.txt}

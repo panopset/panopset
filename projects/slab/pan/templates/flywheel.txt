@@ -1,0 +1,26 @@
+<div class="mainfc">
+
+${@a fragments/flywheel/help.txt}
+${@a fragments/flywheel/main.txt}
+
+    <script>
+ 
+ $(document).ready(function () {
+  showMain();
+ });
+ 
+ function showMain() {
+  $('#help').hide();
+  $('#main').show();
+ }
+ 
+ function showHelp() {
+  $('#main').hide();
+  $('#help').show();
+ }
+
+
+
+    </script>
+
+</div>

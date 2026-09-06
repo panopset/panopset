@@ -1,0 +1,36 @@
+<div class="inset">
+
+<p>
+Alternatively, you may
+<a href="/build.html">build</a> your own, or run it directly from the
+<a href="https://github.com/panopset/${GN}">source</a>.
+</p>
+
+<h1>Desktop Application Downloads</h1>
+
+${downloadsTable}
+
+<h2>Running...</h2>
+
+<h3>Using a platform specific installer.</h3>
+
+<p>
+Substitute flywheel, in the <b>Launch path</b> for your platform listed above,
+with the Panopset <a href="./product.html">application</a> name of your choice.
+</p>
+
+<h3>Using your own JRE.</h3>
+<p>
+If you download the panopset.jar file for your platform, or <a href="build.html">build</a> it,
+place panopset.jar in your home directory, and do the same except for the <b>Java command</b> for your platform,
+as listed above.
+</p>
+
+
+<h2>versions</h2>
+
+<p>
+help-&gt;about, from any Panopset desktop application, will give you the <a href="https://github.com/panopset/${GN}/blob/main/docs/vh.md">version</a>.
+</p>
+
+</div>

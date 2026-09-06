@@ -1,0 +1,4 @@
+This example demonstrates the word command, ${w0}. Each
+word in each line is given a sequential id, starting with zero.  If what you want 
+is all the first words in a list separated by a comma, this is how you do it.
+foo

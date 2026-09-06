@@ -1,0 +1,10 @@
+${@p deskBlurb}Available on the <a href="/desk.html">desktop</a> of your choice${@q}
+${@p com.panopset.flywheel.tokens},${@q}
+${@p pdaTitle}Panopset Desktop Applications${@q}
+${@l pages.txt}
+${@p templateFile}${t0}.txt${@q}
+${@p outputFile}${t0}.html${@q}
+${@p title}${t1}${@q}
+${@p content}${@t templateFile}${@q}
+${@f outputFile}${@t fragments/frame.txt}${@q}${@f version.json}"${@e getVersion()}"
+${@p javacmd}java -cp ~/panopset.jar ${@q}

@@ -1,0 +1,128 @@
+package com.panopset.desk.utilities.dash.publish
+
+import com.panopset.compat.AppVersion
+import com.panopset.compat.Fileop
+import com.panopset.compat.Logz
+import com.panopset.compat.opSecureCopyGet
+import com.panopset.compat.opSecureCopyPut
+import com.panopset.compat.props2map
+import com.panopset.desk.utilities.GenerateDownloadsTable
+import com.panopset.desk.utilities.dash.GrandCentralStation
+import com.panopset.flywheel.FlywheelBuilder
+import java.io.File
+import javafx.application.Platform
+import java.text.SimpleDateFormat
+import java.util.Date
+
+class Deployment(val gcs: GrandCentralStation) {
+    val rhd = gcs.createRemoteHostData()
+    val d = rhd.d
+    val h = rhd.h
+    val remoteBase = "/var/www/$d/html"
+
+    fun publishRaw() {
+        val toScp = remoteBase
+        val fromScpFile = gcs.createSlabRawDirectory()
+        val fromScp = fromScpFile.absolutePath
+        if (fromScpFile.exists()) {
+            Platform.runLater {
+                opSecureCopyPut(rhd, fromScp, toScp)
+            }
+        }
+    }
+
+    fun publishDownloads() {
+        if (gcs.platformKey.isEmpty()) {
+            Logz.errorMsg("No platform key provided as Dash launch parameter.")
+            return
+        }
+        publishDownloadsFor(gcs.platformKey)
+    }
+
+    fun publishBeam() {
+        // TODO: assemble all environment variable checks in a single validation method.
+        val userName = System.getenv()["PAN_SV_NM"]
+        if (userName.isNullOrEmpty()) {
+            Logz.errorMsg("PAN_SV_NM not defined as an environment variable. " +
+                    "See docs/setup/env.md")
+            return
+        }
+        FlywheelBuilder().file(File("projects/slab/pan/templates/beam/beamService.txt"))
+            .targetDirectory(File("tmp/beam")).construct().exec()
+        val fromScp = "tmp/beam/"
+        val fromScpBeamJar = "projects/beam/target/beam.jar"
+        val toScp = "/home/$userName/"
+        val fromScpFile = File(fromScp)
+        if (fromScpFile.exists()) {
+            Platform.runLater {
+                opSecureCopyPut(rhd, fromScp, toScp)
+                opSecureCopyPut(rhd, fromScpBeamJar, toScp)
+                gcs.outputTA.text = "Next... \n\n" +
+                        "    ssh $h\n" +
+                        "    chmod +x installservice.sh\n" +
+                        "    ./installservice.sh\n" +
+                        "    sudo reboot 0\n" +
+                        "Take a short break, then...\n" +
+                        "    ssh $h\n" +
+                        "    sudo netstat -tulpn\n\n" +
+                        "Verify there is a java process listening on port 8080.\n\n" +
+                        "Next, add in /etc/nginx/sites-available/$d, before the location / entry:\n\n" +
+                        " location /beam/ {\n" +
+                        "  proxy_pass http://localhost:8080/;\n" +
+                        " }\n\n" +
+                        "    sudo nginx -t\n" +
+                        "    sudo reboot 0" +
+                        "\n"
+            }
+        } else {
+            Logz.errorMsg("Could not find ${fromScpFile.absolutePath}")
+        }
+    }
+
+    fun publishSite() {
+        val toScp = File("tmp/downloads")
+        val fromScp = "/var/www/$d/html/downloads"
+        opSecureCopyGet(
+            rhd, toScp, fromScp, arrayListOf("json")
+        )
+        val blurb = if (d == "panopset.com") {
+            ""
+        } else {
+            "<h1>Prototype</h1>$d is currently serving as a prototype for the next release of " +
+                    "<a href=\"https://panopset.com\">panopset.com</a>."
+        }
+        FlywheelBuilder().file(File("projects/slab/pan/templates/driver.txt"))
+            .targetDirectory(File("tmp/html"))
+            .map("previewBlurb", blurb)
+            .map("downloadsTable", GenerateDownloadsTable().createDownloadsTable("tmp/downloads"))
+            .map("appVersion", AppVersion.getVersion())
+            .map("fullVersion", AppVersion.getFullVersion())
+            .map("dashDate", dashDateFormat.format(Date()))
+            .map("timestamp", timestampFormat.format((Date())))
+            .map(props2map(Fileop.loadProps(File("deploy.properties"))))
+            .construct().exec()
+        opSecureCopyPut(rhd, "tmp/html", "/var/www/$d/html")
+    }
+
+    private fun publishDownloadsFor(osPath: String) {
+        val fromScp = "target"
+        val toScp = "$remoteBase/downloads/$osPath"
+        val fromScpFile = File(fromScp)
+        val skipDirectory = if (osPath == "mac") {
+            "panopset.app"
+        } else {
+            "panopset"
+        }
+        if (fromScpFile.exists()) {
+            Platform.runLater {
+                opSecureCopyPut(rhd, fromScp, toScp,
+                    arrayListOf(skipDirectory))
+            }
+        } else {
+            Logz.errorMsg("Could not find ${fromScpFile.absolutePath}")
+        }
+    }
+}
+
+private val dashDateFormat = SimpleDateFormat("yyyy-MM-dd")
+private val timestampFormat = SimpleDateFormat("yyyyMMddhhmm")

@@ -1,0 +1,22 @@
+<div class="inset">
+<h1>Build</h1>
+<p>
+
+Using the open <a href="https://github.com/${GN}">source code</a>, you may
+<a href="https://github.com/${GN}/blob/main/docs/build.md">build</a> a platform installer,
+an all-in-one jar, or run it directly from an IDE.
+
+</p>
+
+<p>
+If you don't want to build your own, the installers are also available on the <a href="/downloads.html">downloads</a> page.
+</p>
+
+<h1>terms of use</h1>
+<p>
+For terms of use, please see the <a href="/license.html">License</a> page.
+</p>
+<p>
+&nbsp;
+</p>
+</div>

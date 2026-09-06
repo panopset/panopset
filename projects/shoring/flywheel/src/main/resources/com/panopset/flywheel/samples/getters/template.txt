@@ -1,0 +1,13 @@
+${@p cn}${@e capitalize(w1)}${@q}private ${w0} ${w1};
+
+public ${w0} get${cn}() {
+ if (${w1} == null) {
+  ${w1} = ${w2};
+ }
+ return ${w1};
+}
+
+public void set${cn}(${w0} ${w1}) {
+ this.${w1} = ${w1};
+}
+

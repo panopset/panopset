@@ -1,0 +1,4 @@
+Let's say you want to "grab" only things "in quotes"
+Then you could "use the regex" "function".
+The "results" are stored "in sequential variables r0,r1 etc.", which you
+may subsequently "place anywhere in" your "template" after the regex command.

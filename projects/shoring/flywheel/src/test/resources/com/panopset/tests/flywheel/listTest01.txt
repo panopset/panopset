@@ -1,0 +1,8 @@
+${@f listTest.txt}<html><head><title></title></head><body>
+<ul>
+${@l listTest02.txt}<li>
+${1} : ${@t listTest03.txt}
+</li>${@q}
+</ul>
+</body></html>
+

@@ -1,0 +1,4 @@
+desc=Splitz
+lineBreaks=false
+listBreaks=false
+splitz=3,2

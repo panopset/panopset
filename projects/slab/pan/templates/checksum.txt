@@ -1,0 +1,10 @@
+<div class="inset">
+<h1>Checksum</h1>
+
+<p>
+${deskBlurb}.
+</p>
+
+<img alt="Checksum" src="/images/checksum.png"/>
+</div>
+

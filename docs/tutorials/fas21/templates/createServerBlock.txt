@@ -1,0 +1,4 @@
+${@p DP}${user.home}/Documents/panopset/dev.properties${@q}${@m DP}${@p your_domain}${SITE_FAS21}${@q}${@f createServerBlock.sh}sudo mkdir -p /var/www/${your_domain}/html
+sudo chown -R $USER:$USER /var/www/${your_domain}/html
+sudo chmod -R 755 /var/www/${your_domain}
+

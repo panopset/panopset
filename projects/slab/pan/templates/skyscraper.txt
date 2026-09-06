@@ -1,0 +1,15 @@
+<div class="inset">
+
+<h1>Skyscraper</h1>
+
+${deskBlurb}.
+
+<p>
+<img src="/images/skyscraper.png" alt="skyscraper image"/>
+</p>
+
+<p>
+API tester.
+</p>
+
+</div>

@@ -1,0 +1,7 @@
+${@p foo0}foo0${@q}${@r foo0}bar0${@q}
+${@f replacementsTest.txt}foo
+${@e com.panopset.flywheel.suppressReplacements(true)}
+foo
+${@e com.panopset.flywheel.suppressReplacements(false)}
+foo
+foo0

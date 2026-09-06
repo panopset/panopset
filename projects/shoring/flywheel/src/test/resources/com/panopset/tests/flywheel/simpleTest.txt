@@ -1,0 +1,1 @@
+${@f simpleOut.txt}${@p foo}bar${@q}Foo is ${foo}

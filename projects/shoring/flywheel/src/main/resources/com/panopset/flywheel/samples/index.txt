@@ -1,0 +1,9 @@
+Choose
+escape
+replace
+list
+getters
+tokens
+splitz
+check4match
+regex

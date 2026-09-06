@@ -1,0 +1,6 @@
+bar
+
+foo
+
+bar
+bar0

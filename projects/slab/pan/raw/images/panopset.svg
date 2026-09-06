@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<svg width="256" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <g class="layer">
+  <title>bg</title>
+  <rect fill="#007f7f" height="31.5" id="svg_3" stroke="#000000" width="255" x="0.25" y="-0.13"/>
+ </g>
+ <g class="layer">
+  <title>fg</title>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_6" stroke="#000000" stroke-width="0" text-anchor="middle" x="14.25" xml:space="preserve" y="27.87">P</text>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_7" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="45.5" xml:space="preserve" y="27.88">A</text>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_8" stroke="#000000" stroke-width="0" text-anchor="middle" x="78.25" xml:space="preserve" y="27.87">N</text>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_9" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="113.25" xml:space="preserve" y="27.88">O</text>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_10" stroke="#000000" stroke-width="0" text-anchor="middle" x="147.25" xml:space="preserve" y="27.88">P</text>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_11" stroke="#000000" stroke-width="0" text-anchor="middle" x="178.75" xml:space="preserve" y="27.88">S</text>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_12" stroke="#000000" stroke-width="0" text-anchor="middle" x="211" xml:space="preserve" y="27.88">E</text>
+  <text fill="#00ffff" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_13" stroke="#000000" stroke-width="0" text-anchor="middle" x="242" xml:space="preserve" y="27.88">T</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_21" stroke="#000000" stroke-width="0" text-anchor="middle" x="13.85" xml:space="preserve" y="27.62">P</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_20" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="45.1" xml:space="preserve" y="27.63">A</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_19" stroke="#000000" stroke-width="0" text-anchor="middle" x="77.85" xml:space="preserve" y="27.62">N</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_18" stroke="#000000" stroke-width="0" style="cursor: move;" text-anchor="middle" x="112.86" xml:space="preserve" y="27.63">O</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_17" stroke="#000000" stroke-width="0" text-anchor="middle" x="146.85" xml:space="preserve" y="27.63">P</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_16" stroke="#000000" stroke-width="0" text-anchor="middle" x="178.35" xml:space="preserve" y="27.63">S</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_15" stroke="#000000" stroke-width="0" text-anchor="middle" x="210.6" xml:space="preserve" y="27.63">E</text>
+  <text fill="#000000" font-family="Sans-serif" font-size="34" font-weight="bold" id="svg_14" stroke="#000000" stroke-width="0" text-anchor="middle" x="241.6" xml:space="preserve" y="27.63">T</text>
+ </g>
+</svg>

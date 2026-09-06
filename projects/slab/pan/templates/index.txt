@@ -1,0 +1,34 @@
+${previewBlurb}
+
+<div class="inset">
+
+<p>Keep it real with</p>
+<h1>Panopset <a href="./flywheel.html">Flywheel</a></h1>
+<p>
+With flywheel, you never have to write the same thing twice.
+</p>
+<p>
+A freeform template processor, with a simple shell script like syntax,
+it takes the tedium out of your work, freeing
+up your creative energy.
+</p>
+
+<ul><li>
+<a href="https://github.com/panopset/src">Open source</a>, fully customizable.
+</li><li>
+Cross platform.
+</li><li>
+<a href="./license.html">Inexpensive</a>, and free for anyone who can't afford it.
+</li><li>
+No artificial ingredients, templates are designed by something more reliable, and real: your mind.
+</li></ul>
+
+<p>Common use case samples are a dropdown selection away.</p>
+
+<br>
+
+<p>
+Looking for Panopset Blackjack? It has been renamed and moved to <a href="https://fas21.com">Fas21</a> Blackjack.
+</p>
+
+</div>

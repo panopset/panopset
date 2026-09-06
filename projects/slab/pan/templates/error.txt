@@ -1,0 +1,6 @@
+<div class="inset">
+
+<h1>Error occurred.</h1>
+<p>Apologies, something went wrong, and no further details are available.</p>
+
+</div>

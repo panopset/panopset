@@ -1,0 +1,7 @@
+${@p DP}${user.home}/Documents/panopset/dev.properties${@q}${@m DP}${@p your_domain}${SITE_FAS21}${@q}${@f index.html}<html>
+<head><title>${your_domain}</title></head>
+<body>
+ <h1>Success!  The ${your_domain} server block is working!</h1>
+</body></html>
+
+

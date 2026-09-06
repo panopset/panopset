@@ -1,0 +1,4 @@
+${@f rawTest.txt}Check
+
+${@a simpleTest.txt}
+${@p foo}bar${@q}Foo is ${foo}

@@ -1,0 +1,17 @@
+index,Panopset
+product,Panopset Product Overview
+flywheel,Panopset Flywheel
+skyscraper,Panopset Skyscraper
+about,About Panopset
+scrambler,Panopset Scrambler
+checksum,Panopset Checksum
+lowerclass,Panopset Lowerclass
+desk,${pdaTitle}
+build,${pdaTitle}
+license,${pdaTitle}
+news,Panopset News
+downloads,Panopset Downloads
+links,links
+dox,Kotlin documentation
+pv,Private download page
+error,Error

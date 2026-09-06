@@ -1,0 +1,2 @@
+${@p bar}bar${@q}foo
+${bar}

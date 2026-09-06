@@ -1,0 +1,15 @@
+${@p table_header}<table>${@q}${@p author}author 0${@q}${@p quote}some text.${@q}${@p fileName}outdir/complexOut.html${@q}${@f @fileName}<html><head><title>Good Quotes</title></head>
+<body>
+
+<h1>some header</h1>
+${table_header}
+${@t quoteTemplate.txt}
+</table>
+
+<h1>More, From a List</h1>
+
+${table_header}${@p com.panopset.flywheel.tokens}|${@q}${@l quoteList.txt}
+${@p author}${t0}${@q}${@p quote}${t1}${@q}${@t quoteTemplate.txt}
+${@q}</table>
+
+</body></html>

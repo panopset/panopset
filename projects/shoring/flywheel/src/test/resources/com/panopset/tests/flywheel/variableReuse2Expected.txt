@@ -1,0 +1,1 @@
+echo blue | sudo -S mv panopsetweb.service /etc/systemd/system/

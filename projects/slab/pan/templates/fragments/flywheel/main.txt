@@ -1,0 +1,299 @@
+<div id="main" class="dsline">
+
+<div id="pan00" class="dscol">
+ <form id="fwform" action="/" method="post"> 
+  <div>
+ <div class="tbl">
+  <div class="row">
+    <button type="button" onclick="showHelp()">Help</button>
+    <label for="samples">Samples:&nbsp;</label>
+     <select name="samples" id="samples">
+     <option>Choose</option>
+     <option data-listText="x
+"
+      data-templateText="The backslash, \\, or escape character,\
+works the way you would expect.
+${@p out}\
+foo\
+bar
+
+foo\\bar\
+${@q}\
+This is the out variable as defined in the template:
+${out}
+"
+      data-lineBreaks="true"
+      data-listBreaks="false"
+     >escape</option>
+     <option data-listText="In this example, we use the replace command, textToReplaceWithCommandPrefixr replaceme}, 
+to show how to escape template commands.  Rare that you&#39;d ever need to do that, but showing
+it here as a demo of the replace, push, quit, and variable commands.
+"
+      data-templateText="${@p replaceme}textToReplaceWithCommandPrefix${@q}${@p pfx}${@${@q}${@r replaceme}${pfx}${@q}${l}
+"
+      data-lineBreaks="true"
+      data-listBreaks="false"
+     >Replace</option>
+     <option data-listText="This example demonstrates the word command, ${w0}. Each
+word in each line is given a sequential id, starting with zero.  If what you want 
+is all the first words in a list separated by a comma, this is how you do it.
+foo
+"
+      data-templateText="${w0},
+"
+      data-lineBreaks="false"
+      data-listBreaks="false"
+     >Variable</option>
+     <option data-listText="Integer foo 0
+String bar &quot;&quot;
+"
+      data-templateText="${@p cn}${@e capitalize(w1)}${@q}
+private ${w0} ${w1};
+
+public ${w0} get${cn}() {
+ if (${w1} == null) {
+  ${w1} = ${w2};
+ }
+ return ${w1};
+}
+
+public void set${cn}(${w0} ${w1}) {
+ this.${w1} = ${w1};
+}
+"
+      data-lineBreaks="true"
+      data-listBreaks="false"
+     >Java Getters and Setters</option>
+     <option data-listText="x|y|z
+a|b|c
+"
+      data-templateText="Tokens, reversed for fun: ${t2},${t1},${t0}, but you can put them in any order.
+"
+      data-tokens="|"
+      data-lineBreaks="true"
+      data-listBreaks="false"
+     >Tokens</option>
+     <option data-listText="abc12xyz
+jjjmmccc
+"
+      data-templateText="${w0}|
+"
+      data-splitz="3,2"
+      data-lineBreaks="false"
+      data-listBreaks="false"
+     >Splitz</option>
+     <option data-listText="foo
+bar
+"
+      data-templateText="${@e check4match(foo,w0,text or variable if they match,text or variable if they don&#39;t match)}
+"
+      data-lineBreaks="true"
+      data-listBreaks="true"
+     >check4match</option>
+     <option data-listText="Let&#39;s say you want to &quot;grab&quot; only things &quot;in quotes&quot;
+Then you could &quot;use the regex&quot; &quot;function&quot;.
+The &quot;results&quot; are stored &quot;in sequential variables r0,r1 etc.&quot;, which you
+may subsequently &quot;place anywhere in&quot; your &quot;template&quot; after the regex command.
+"
+      data-templateText="${@e regex(\&quot;([^\&quot;]*)\&quot;,l)}${r0} ${r1} ${r2}
+"
+      data-lineBreaks="false"
+      data-listBreaks="false"
+     >regex</option>
+    </select>
+   <button type="button" onClick="clearAllFields()">Clear</button>
+   <button type="button" onClick="filterLines()">Filter</button>
+  </div>
+  <div class="row">
+   <div class="cellh">
+    <label for="lineBreakStr1"><input value="true" onchange="refreshResult()" type="checkbox" id="lineBreakStr1" name="lineBreakStr"><input type="hidden" name="_lineBreakStr" value="on"/>Line breaks.</label>
+     <br/>
+    <label for="listBreakStr1"><input value="true" onchange="refreshResult()" type="checkbox" id="listBreakStr1" name="listBreakStr"><input type="hidden" name="_listBreakStr" value="on"/>List breaks.</label>
+   </div>
+   <div>
+    <label for="functions">Append function:&nbsp;</label>
+    <select name="functions" id="functions">
+     <option>Choose</option>
+     <option data-functionExample="${@e capitalize(foo)}"
+     >capitalize</option>
+     <option data-functionExample="${@e capund(MakeThisCapUnderscore)}"
+     >capund</option>
+     <option data-functionExample="${@e check4match(foo,bar,matches,doesnotmatch)}"
+     >check4match</option>
+     <option data-functionExample="${@e combine(2)}"
+     >combine</option>
+     <option data-functionExample="${@e findLine(foo)}"
+     >findLine</option>
+     <option data-functionExample="${@e findLines(foo, bar)}"
+     >findLines</option>
+     <option data-functionExample="${@e getVersion()}"
+     >getVersion</option>
+     <option data-functionExample="${@e getBuildNumber()}"
+     >getBuildNumber</option>
+     <option data-functionExample="${@e regex(foo)} result: ${r0}"
+     >regex</option>
+     <option data-functionExample="${@e replace(text, foo, bar)}"
+     >replace</option>
+     <option data-functionExample="${@e replaceAll(text, foo, bar)}"
+     >replaceAll</option>
+     <option data-functionExample="${@e toLowerCase(foo)}"
+     >toLowerCase</option>
+     <option data-functionExample="${@e toUpperCase(foo)}"
+     >toUpperCase</option>
+     <option data-functionExample="${@e upund(MakeThisUppercaseThenReplaceSpacesWithUnderscore)}"
+     >upund</option>
+    </select>
+    <br/>
+    <label>
+     Token(s):
+     <input type="text" id="tokens" onchange="refreshResult();" name="tokens" value="" />
+    </label>
+    <label>
+     Split(s):
+     <input type="text" id="splitz" onchange="refreshResult();" name="splitz" value="" />
+    </label>
+   </div>
+  </div>
+ </div>
+
+</div>
+  <div id="pan02" class="dsline">
+   <textarea onchange="refreshResult();" onkeyup="setDirty();" id="listStr" placeholder="List" name="listStr"></textarea>
+   <textarea class="dsflex1" onchange="refreshResult();" onkeyup="setDirty();" id="template" placeholder="Template" name="template"></textarea>
+  </div>
+ </form>
+ <button onclick="doSelectCopy('result')" style="text-align: left;">Copy result to clipboard</button>
+ <textarea class="dsflex1" id="result" placeholder="Results will appear here, as you make changes above."></textarea>
+</div>
+
+<script>
+ $(document).ready(function () {
+  $("#functions").change(function(){
+   var optn = $('option:selected', this);
+   var fe = optn.attr('data-functionExample');
+   if (fe) {
+    var pv = $('#template').val();
+    $('#template').val(pv + fe);
+   }
+  });
+ });
+
+ $(document).ready(function () {
+  $("#samples").change(function(){
+   var optn = $('option:selected', this);
+   populateSample(
+    optn.attr('data-listText'),
+    optn.attr('data-templateText'),
+    optn.attr('data-tokens'),
+    optn.attr('data-splitz'),
+    optn.attr('data-lineBreaks'),
+    optn.attr('data-listBreaks')
+   );
+  });
+ });
+
+ function populateSample(
+  listText, 
+  templateText, 
+  tokens, 
+  splitz, 
+  lineBreaks, 
+  listBreaks) {
+  $('#listStr').val(listText);
+  $('#template').val(templateText);
+  $('#tokens').val(tokens);
+  $('#splitz').val(splitz);
+  if (lineBreaks == 'true') {
+   $('#lineBreakStr1').prop('checked', true);
+  } else {
+   $('#lineBreakStr1').prop('checked', false);
+  }
+  if (listBreaks == 'true') {
+   $('#listBreakStr1').prop('checked', true);
+  } else {
+   $('#listBreakStr1').prop('checked', false);
+  }
+  refreshResult();
+ }
+ 
+ function clearAllFields() {
+  $('#listStr').val('');
+  $('#template').val('');
+  $('#tokens').val('');
+  $('#splitz').val('');
+  $('#lineBreakStr1').prop('checked', false);
+  $('#listBreakStr1').prop('checked', false);
+  $('#result').val('');
+  $('#samples').val('Choose');
+  $('#functions').val('Choose');
+ }
+
+ function filterLines() {
+  let out = '';
+  const a00 = $('#listStr').val().split('\n')
+  const a01 = $('#template').val().split('\n');
+  loop:
+  for (let i00 = 0; i00 < a00.length; i00++) {
+   for (let i01 = 0; i01 < a01.length; i01++) {
+    const inpstr = a00[i00];
+    const fltstr = a01[i01];
+    if (inpstr === fltstr) {
+     continue loop;
+    } else {
+     out = out + inpstr + '\n';
+    }
+   }
+  }
+  $('#result').val(out);
+ }
+
+ function setDirty() {
+  if (dirty) {
+   return;
+  }
+  dirty = true;
+  window.setTimeout(function () { refreshResult(); }, 500 );
+ }
+ 
+ function doSelectCopy(id) {
+  el = document.getElementById(id); 
+  el.focus();
+  el.select();
+  navigator.clipboard.writeText($('#result').val());
+ }
+ 
+ function refreshResult() {
+  dirty = false;
+  var fwi = {}
+  fwi["lineBreakStr"] = $("#lineBreakStr1").prop("checked");
+  fwi["listBreakStr"] = $("#listBreakStr1").prop("checked");
+  fwi["listStr"] = $("#listStr").val();
+  fwi["template"] = $("#template").val();
+  fwi["tokens"] = $("#tokens").val();
+  fwi["splitz"] = $("#splitz").val();
+  $.ajax({
+   type: "POST",
+   contentType: "application/json",
+   url: "/beam/af",
+   data: JSON.stringify(fwi),
+   cache: false,
+   timeout: 100000,
+   success: function (data) {
+    $('#result').val(data);
+   },
+   error: function (e) {
+    console.log("Error: ", e);
+   }
+  });
+ }
+</script>
+
+<script>
+ var dirty = false;
+ refreshResult();
+</script>
+
+</div>
+
+</div>
+

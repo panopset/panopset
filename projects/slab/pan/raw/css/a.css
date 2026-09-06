@@ -1,0 +1,197 @@
+body {
+ height: 99%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+ font-variant: small-caps;
+ color: var(--hdr);
+}
+
+th, td {
+ text-align: left;
+ vertical-align: top;
+}
+
+textarea {
+ color: var(--panfgtxt); background-color: var(--panbgtxt);
+}
+
+.linkdown span {
+ display: inline-block;
+ transform: rotate(90deg);
+}
+
+.pad0 {
+ padding: 0px;
+}
+
+.padl {
+ padding: 0px 10px 0px 10px;
+ height: 32px;
+}
+
+div.inset {
+ margin: 1em;
+}
+
+.mainfc {
+ display: flex;
+ flex-flow: column;
+ height: 800px;
+}
+
+div.flexdown {
+ display: flex;
+ flex-flow: column;
+}
+
+/* ************************** */
+/* display sink section       */
+/* ************************** */
+
+div.dscontent {
+ display: flex;
+ flex-direction: column;
+ align-items: stretch;
+ height: 100%;
+}
+
+div.dscontent2 {
+ display: flex;
+ flex-direction: column;
+}
+
+div.dscol {
+ display: flex;
+ flex-direction: column;
+ align-items: stretch;
+}
+
+div.dsline {
+ display: inline;
+}
+
+div.dsmain {
+ display: inline;
+ height: 100%;
+}
+
+textarea.dsfill {
+ width: 100%;
+ height: 100%; 
+ box-sizing: border-box;
+}
+
+.dsflex1 {
+ flex:1;
+}
+
+.dsrow {
+ display: flex;
+ flex-direction: row;
+}
+
+.dsalert {
+ color: var(--dsalert);
+}
+
+.dsheight100 {
+ height: 100%;
+}
+
+.dswidth100 {
+ width: 100%;
+}
+
+table {
+ display: table;
+ border-spacing: 8px 0;
+}
+
+tbody {
+ width: 100%;
+}
+
+.dsnw {
+ white-space: nowrap;
+}
+
+.dsw99 {
+ width: 99%;
+}
+
+/* ************************** */
+/* TODO: rename */
+/* ************************** */
+
+.output2 {
+ width: 100%;
+ display: block;
+ padding: 5px;
+ border-style: solid; 
+ border-color: var(--panborder);
+ border-width: thin;
+ font-family: "Courier New";
+ font-size: smaller;
+ background-color: var(--panhltbg);
+ color: var(--panhltfg);
+}
+
+.nzr_flex1 {
+ flex:1;
+}
+
+.nzr_row {
+ display: flex;
+ flex-direction: row;
+}
+
+div.content {
+ display: inline;
+ flex: 1;
+ border: 1px solid var(--border);
+}
+
+/* ************************** */
+/* forms                      */
+/* ************************** */
+
+.tbl { display: table; }
+.row { display: table-row; }
+.cellh {display: table-cell; vertical-align: top; border: 1px solid var(--panborder); }
+
+.nzr_flex1_1_100 {
+ flex:1 1 100%;
+}
+
+.nzr_fillv {
+ flex-grow:1;
+ flex-direction: column;
+ height:100%;
+}
+
+/* ************************** */
+
+#pan00 {
+ display: flex; width: 100%; height: 100vh; flex-direction: column;
+}
+#fwform {
+ display: flex; flex-direction: column; height: 40%;
+}
+#pan02 {
+ display: flex; background-color: var(--panbg); flex: 1;
+}
+#listStr {
+ display: flex; min-width: 10px; width: 460px; border-width: 2px; border-style: solid; resize: horizontal; overflow: auto;
+}
+#template {
+ flex: 1;
+}
+#result {
+ flex: 1;
+}
+
+table.w1000 {
+ width: 1000px;
+}
+

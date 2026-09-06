@@ -1,0 +1,9 @@
+maple
+|bar        |blue|
+|bat        |yellow|
+redwood
+|bar        |green|
+|bat        |red|
+cedar
+|bar        |blue|
+|bat        |yellow|

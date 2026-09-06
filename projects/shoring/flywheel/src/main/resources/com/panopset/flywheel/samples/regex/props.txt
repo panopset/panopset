@@ -1,0 +1,4 @@
+desc=regex
+lineBreaks=false
+listBreaks=false
+tokens=

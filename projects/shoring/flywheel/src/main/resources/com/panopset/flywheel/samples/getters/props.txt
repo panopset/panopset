@@ -1,0 +1,3 @@
+desc=Java Getters and Setters
+lineBreaks=true
+listBreaks=true

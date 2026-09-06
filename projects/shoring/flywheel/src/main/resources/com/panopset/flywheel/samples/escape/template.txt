@@ -1,0 +1,10 @@
+The backslash, \\, or escape character,\
+works the way you would expect.
+${@p out}\
+foo\
+bar
+
+foo\\bar\
+${@q}\
+This is the out variable as defined in the template:
+${out}

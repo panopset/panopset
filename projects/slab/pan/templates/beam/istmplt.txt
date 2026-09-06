@@ -1,0 +1,4 @@
+${@p sudo}echo ${PAN_SV_PW} | sudo -S ${@q}${sudo} mv panopsetweb.service /etc/systemd/system/
+${sudo} mkdir -p /etc/panopsetweb
+${sudo} mv panopsetweb.conf /etc/panopsetweb/
+${sudo} systemctl enable panopsetweb

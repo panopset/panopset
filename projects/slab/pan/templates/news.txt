@@ -1,0 +1,12 @@
+<div class="inset">
+<h1>News</h1>
+
+<h3>August, 2021</h3>
+<p>
+Introduction of various platform installers.
+</p>
+<h3>July, 2021</h3>
+<p>
+Java 9 modules adopted.
+</p>
+</div>

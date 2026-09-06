@@ -1,0 +1,161 @@
+  <div id="help">
+
+<div>
+<button type="button" onclick="showMain()">Got it!</button>
+</div>
+
+<div class="inset">
+
+<header>
+<p>
+This form may be used for quick copy/paste Flywheel tasks.
+List of items goes on the top left, edit the template on the top right, 
+  results will appear at the bottom.  Try some of the samples, to get an idea
+  of how much easier some of your tasks can be.
+</p>
+</header>
+
+
+<h1>Flywheel</h1>
+<p>Panopset Flywheel is a freeform text template processor.</p>
+<p>While the web version does not have the file processing capabilities of the desktop version,
+  it is a timesaver for a wide variety of otherwise tedious tasks.</p>
+<p>
+There are many ways to use Flywheel, for example:
+</p>
+<ul><li>
+On the web, for quick copy paste tasks. (Click the &quot;Got it!&quot; button above left, to go back to the online Flywheel form, to try it out.)
+<ul><li>
+Since panopset.com itself is on a cheap server with no guaranteed availability, you are encouraged to <a href="https://github.com/panopset/src">host your own</a> for ensured availability.
+</li></ul><li>
+As a JavaFX application, called using the Java 9 Jigsaw way.  You will need to build that from <a href="https://github.com/panopset/src">source</a>.
+</li><li>
+As a JavaFX application, <a href="/utilities">called</a> using the traditional way, from an all-in-one jar.  You will need to <a href="/download">download</a> or build panopset.jar, for your system.
+</li><li>
+Called directly from your own Java applications.  You could do this using panopset.jar, or build just what you need (flywheel and compat modules) from the source.
+</li></ul>
+
+<p>
+The best way to think about designing your templates, is to always keep in mind that you never have to define anything twice.
+</p>
+
+<h2>General Flywheel Commands</h2>
+<p>These general Flywheel commands are available in both the web, and application versions of Flywheel.</p>
+<h3>Push</h3>
+<p>
+Push defines a variable. All the freeform templates, text, and other commands to follow until its matched quit command will be available as its defined variable to subsequent commands.
+</p>
+<pre>${@p foo}bar{@q}</pre>
+<p>
+Anything in between the push command, and its matching quit command, are defined as a variable, foo in the above example, which will be available in all subsequent commands and templates called.
+</p>
+<h3>List</h3>
+<p>In the Flywheel <a href="/">web</a> app, you only get one list, the top left list text area.  In the Flywheel <a href="/utilities">desktop</a> app, you may use as many lists as you like, to drive processing.</p>
+<pre>${@l relpath}</pre>
+<p>relpath is a path to a list, relative to the main template parent directory. In our <a href="https://github.com/panopset/flywheel_tasks/blob/main/nginx/README.md">nginx use case</a>,
+<a href="https://github.com/panopset/flywheel_tasks/blob/main/nginx/go.txt">go.txt</a> is driven by the <a href="https://github.com/panopset/flywheel_tasks/blob/main/nginx/sites.txt">sites.txt</a> list.
+</p>
+<h3>Quit</h3>
+<p>Partners with the File, Push, and List commands to complete them, allowing for all the freeform creativity you can come up with.</p>
+<pre>${@q}</pre>
+<p>The template processor will add un-matched quit commands if necessary, but if a quit command appears with no matchable command preceding it, flywheel will output an error message and stop.</p>
+<h3>Variable</h3>
+<p>
+The variable command is unique, in that it has no @ symbol to define it as one of the other commands, it is just like a Linux script variable.
+</p>
+<pre>${foo}</pre>
+<p>
+will output bar, if defined as shown in the Push example above.
+</p>
+<h2>File Related Application Commands</h2>
+<p>These commands are not available in the web version, since they either involve desktop files, or custom Java calls.</p>
+
+<h3>Template</h3>
+<p>
+Templates can call other templates, all freeform. 
+</p>
+<pre>${@t relpath}</pre>
+<p>
+... where relpath is the path relative to the template passed to Flywheel in the first parameter.  In our nginx use case, the <a href="https://github.com/panopset/flywheel_tasks/blob/main/nginx/run.sh">command</a> would be:
+</p>
+<pre>java -cp ~/panopset.jar com.panopset.flywheel.Flywheel go.txt target</pre>
+<p>
+... and in this case the template passed is <a href="https://github.com/panopset/flywheel_tasks/blob/main/nginx/go.txt">go.txt</a>.
+</p>
+<h3>Raw</h3>
+<p>When you wish to output a file without formatting, usually when showing a sample Flywheel script, such as is done in this file use the a command, which is just like the t command except no directives are processed.</p>
+<pre>${@a relpath}</pre>
+<h3>File</h3>
+<p>
+This is a path relative to the output directory you specified in calling the Flywheel class.
+</p>
+<pre>${@f relpath}everything here gets put in the file.${@q}</pre>
+<p>
+You may also specify a variable, as the relpath.  In our nginx use case, looking at <a href="https://github.com/panopset/flywheel_tasks/blob/main/nginx/go.txt">go.txt</a> again,
+the variable is 1, which is the first word in the <a href="https://github.com/panopset/flywheel_tasks/blob/main/nginx/sites.txt">sites.txt</a> list being processed, using the List command.
+</p>
+<h3>Execute</h3>
+<p>This allows you to do anything you like. You have to define your custom executables statically, before calling Flywheel:</p>
+<pre>ReflectionInvoker.defineTemplateAllowedReflection("getVersion", "com.panopset.compat.AppVersion.getVersion");</pre>
+<p>Once it is defined, it may be executed with any String parameters comma separated in the parentheses:</p>
+<pre>${@e getVersion()}</pre>
+<h3>Map</h3>
+<p>Include any properties file in the general Flywheel map, using the map command. Define a variable with the Push
+command, which contains the path to the map, then pass it to the m command. For example:</p>
+<pre>${@p PATH_TO_MAP}${user.home}/Documents/panopset/dev.properties}${@q}${@m PATH_TO_MAP}</pre>
+
+<h2>Use case</h2>
+<p>
+<img id="slide" src="/images/homeslides/slide009.jpg" alt="Panopset"/>
+<p/>
+
+
+<p>
+Click anywhere in the image above to advance the slideshow, which
+demonstrates a typical Flywheel <a href="https://github.com/panopset/src/tree/main/docs/uses/flywheel/nginx">use case</a>.
+</p>
+
+<h2>History</h2>
+<p>
+Flywheel was first written using <a href="https://en.wikipedia.org/wiki/Macintosh_Programmer&#39;s_Workshop">MPW</a> back in 1996.
+It was moved to Java right around the dawn of Java, and has been refined off and on over the years ever since.
+</p>
+
+</div>
+<script>
+
+var slides = ["slide000.jpg","slide001.jpg","slide002.jpg","slide003.jpg","slide005.jpg","slide006.jpg","slide007.jpg","slide008.jpg","slide009.jpg"];
+
+var pindx = slides.length - 1;
+var auto = true;
+
+function nextImage() {
+ if (pindx >= slides.length) {
+  pindx = 0;
+ }
+ return slides[pindx++];
+}
+
+function advImg() {
+  $('#slide').attr('src', '/images/homeslides/' + nextImage());
+}
+
+$(document).ready(function(){
+ $("img").click(function(){
+  advImg();
+  auto = false;
+ });
+});
+
+
+var intervalId = window.setInterval(function(){
+ if (auto) {
+  advImg();
+ }
+}, 6000);
+
+
+</script>
+
+</div>
+
