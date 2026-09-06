@@ -6,7 +6,7 @@ import java.util.Properties
 class DashOperatingSystemProperties(val env: String) {
     fun load(): HashMap<String, String> {
         val rtn = HashMap<String, String>()
-        val propFileName = "$env.properties"
+        val propFileName = "app$env.properties"
         val props = Properties()
         props.load(FileInputStream(propFileName))
         if (props.isEmpty) {

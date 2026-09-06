@@ -261,6 +261,6 @@ object PanComponentFactory {
         return rtn
     }
 
-    const val licenseLinkText = "https://github.com/panopset/src/blob/main/LICENSE"
+    const val licenseLinkText = "https://github.com/panopset/panopset/blob/main/LICENSE"
     const val panDarkTheme = "-fx-base:black"
 }

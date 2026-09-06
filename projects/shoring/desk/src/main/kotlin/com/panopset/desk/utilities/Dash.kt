@@ -1,6 +1,7 @@
 package com.panopset.desk.utilities
 
 import com.panopset.PanopsetBranding
+import com.panopset.compat.Logz
 import com.panopset.desk.utilities.dash.DashOperatingSystemProperties
 import com.panopset.desk.utilities.dash.DashPaneFactory
 import com.panopset.fxapp.ApplicationBranding
@@ -48,7 +49,7 @@ class Dash(env: String) : BrandedApp(
         @JvmStatic
         fun main(args: Array<String>) {
             if (args.isEmpty()) {
-                println("Environment parameter expected.")
+                Logz.errorMsg("Platform key expected as Dash program argument 0: linuxdeb, linuxrpm, mac, or win.")
                 exitProcess(1)
             }
             Dash(args[0]).go()
