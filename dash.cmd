@@ -1,1 +1,1 @@
-target\standalone\panopset\dash appwin
+target\standalone\panopset\dash win
