@@ -16,7 +16,7 @@ the basic strategy, as well as practice counting cards using
 a variety of strategies, which can be simulated at tens of thousands
 of hands per second (t key).
 
-I'm a compulsive degenerate gambler. I wrote fas21 because
+I wrote fas21 because
 none of the other blackjack apps had a fast deal feature
 (irrelevant to this tutorial, but go to 
 [fas21.com](https://fas21.com) for a full
@@ -50,30 +50,3 @@ DOCN stockholder, you may use your own vendors.)
 * Next, you'll set up your server [block](block.md).
 
 At this point we have a letsencrypt secured server block attached to fas21.com.
-
-Next we'll need some content. For this, 
-
-* Install [flutter](../../flutter/README.md)
-
-Then
-
-
-    cd docs/tutorials/fas21/flutter
-    flutter create blackjack
-
-
-Follow any instructions given from executing the flutter create, regarding
-gradle/java compatibility.
-
-
-    cd blackjack
-    flutter analyze
-
-
-Make sure you see "No issues found!", before continuing.
-
-
-    flutter build web --base-href web
-    cd ../../scripts
-    ./deployFlutter.sh
-

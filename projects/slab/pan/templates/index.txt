@@ -14,7 +14,7 @@ up your creative energy.
 </p>
 
 <ul><li>
-<a href="https://github.com/panopset/src">Open source</a>, fully customizable.
+<a href="https://github.com/panopset/panopset">Open source</a>, fully customizable.
 </li><li>
 Cross platform.
 </li><li>

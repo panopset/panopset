@@ -7,4 +7,3 @@ ${@p outputFile}${t0}.html${@q}
 ${@p title}${t1}${@q}
 ${@p content}${@t templateFile}${@q}
 ${@f outputFile}${@t fragments/frame.txt}${@q}${@f version.json}"${@e getVersion()}"
-${@p javacmd}java -cp ~/panopset.jar ${@q}

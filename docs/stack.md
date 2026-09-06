@@ -16,13 +16,6 @@ Websites need domain names, so we register them with [Squarespace](https://domai
 
 Apps need to be signed, so we're going with [Sectigo](https://sectigo.com), which requires Windows.
 
-### Flutter
-
-With the introduction of mobile devices, [WORA](https://en.wikipedia.org/wiki/Write_once,_run_anywhere) died horribly.
-
-[Flutter](https://flutter.dev/) seems to be keeping the dream alive, for publishing apps anyway.
-
-
 ---
 
 Once everything is stacked up neatly, you can [run](../README.md) the Panopset developer dashboard.

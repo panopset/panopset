@@ -19,11 +19,10 @@ Substitute flywheel, in the <b>Launch path</b> for your platform listed above,
 with the Panopset <a href="./product.html">application</a> name of your choice.
 </p>
 
-<h3>Using your own JRE.</h3>
+<h3>Using a standalone application.</h3>
 <p>
-If you download the panopset.jar file for your platform, or <a href="build.html">build</a> it,
-place panopset.jar in your home directory, and do the same except for the <b>Java command</b> for your platform,
-as listed above.
+Unzip the standalone application for your platform, cd to the directory that you place the contents in, and then
+run the application of your choice as shown in the example for your platform above.
 </p>
 
 

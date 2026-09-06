@@ -14,8 +14,6 @@ For Debian (DEB) based systems, we start with installing git, vim (optional, you
 
 build-essential comes with Linux Mint these days, but I include it in the docs anyway, in case your DEB based [distro](https://distrowatch.com/) doesn't include it.
 
-Also added some [qt](../setup/qt.md) dependencies, not sure yet if we stay with JavaFX, or go with Flutter or Qt for desktop applications.
-
 Once you have a workstation set up, next you'll want to create some environment variables*.
 
 On Linux MINT, you would add them to the end of your .profile file.
