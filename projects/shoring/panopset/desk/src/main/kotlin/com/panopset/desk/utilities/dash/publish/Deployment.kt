@@ -127,13 +127,18 @@ class Deployment(val gcs: GrandCentralStation) {
     }
 
     private fun publishDownloadsFor(osPath: String) {
-        val fromScp = "target"
+        val projectName = gcs.projectDir.name
+        val projectBaseDir = gcs.projectDirectorySelector.createDir()
+        val fromScpFile = File(Fileop.combinePaths(
+            projectBaseDir,
+            "target"
+        ))
+        val fromScp = fromScpFile.absolutePath
         val toScp = "$remoteBase/downloads/$osPath"
-        val fromScpFile = File(fromScp)
         val skipDirectory = if (osPath == "mac") {
-            "panopset.app"
+            "$projectName.app"
         } else {
-            "panopset"
+            projectName
         }
         if (fromScpFile.exists()) {
             Platform.runLater {

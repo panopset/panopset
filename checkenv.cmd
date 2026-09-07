@@ -1,4 +1,5 @@
 @echo off
+call readProps.cmd deploy.properties
 echo Checking the environment variables.
 if [%PANREQDEF%] == [T] GOTO end
 echo Checking JAVA_HOME
@@ -18,6 +19,8 @@ echo Checking PAN_REDIS_PORT
 if [%PAN_REDIS_PORT%] == [] GOTO LabelFail
 echo Checking PAN_REDIS_PWD
 if [%PAN_REDIS_PWD%] == [] GOTO LabelFail
+echo Checking PAN, if this check fails make sure deploy.properties is valid and loaded.
+if [%PAN%] == [] GOTO LabelFail
 echo All environment variables are there.
 GOTO good
 

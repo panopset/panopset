@@ -2,11 +2,11 @@ package com.panopset.desk.utilities.dash.rows
 
 import com.panopset.desk.utilities.dash.GrandCentralStation
 import com.panopset.desk.utilities.dash.sm.ServerState
+import java.io.StringWriter
 
 class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
     override fun updateOutput() {
         val rhd = gcs.createRemoteHostData()
-        val d = rhd.d
         val slabRawDirectory = gcs.createSlabRawDirectory()
         val slabTemplateDriverFile = gcs.createSlabTemplateDriverFile()
         val projectsBeamDirectory = gcs.createProjectsBeamDirectory()
@@ -19,13 +19,30 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
             gcs.publishRawBtn.isDisable = !isRawEnabled
             gcs.publishDownloadsBtn.isDisable = !isDownloadEnabled
             gcs.publishBeamBtn.isDisable = !isBeamEnabled
-            gcs.publishSiteBtn.isDisable = false
+            gcs.publishSiteBtn.isDisable = !isHtmlEnabled
         }
+        val sw = StringWriter()
         if (isRawEnabled) {
-            showStateReport("Ready to publish to $d!")
+            sw.append("Ready to publish raw directory ${slabRawDirectory.absolutePath}!\n")
         } else {
-            showStateReport("Ready to publish to $d!\n\n" +
-                    "Raw disabled because there is no ${slabRawDirectory.absolutePath}.")
+            sw.append("Raw disabled because there is no ${slabRawDirectory.absolutePath}.\n")
         }
+        if (isDownloadEnabled) {
+            sw.append("Ready to publish Downloads!\n")
+        } else {
+            sw.append("Downloads disabled because there is no ${projectsShoringDirectory.absolutePath}.\n")
+        }
+        if (isBeamEnabled) {
+            sw.append("Ready to publish Springboot Beam!\n")
+        } else {
+            sw.append("Beam disabled because there is no ${projectsBeamDirectory.absolutePath} Springboot project.\n")
+        }
+        if (isHtmlEnabled) {
+            sw.append("Ready to publish website!\n")
+        } else {
+            sw.append("Html disabled because there is no Flywheel template driver file for the website:\n" +
+                    "     ${slabTemplateDriverFile.absolutePath}.\n")
+        }
+        showStateReport(sw.toString())
     }
 }
