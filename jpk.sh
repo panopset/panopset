@@ -46,10 +46,10 @@ $R/com/fasterxml/jackson/core/jackson-annotations/$JA/jackson-annotations-$JA.ja
 $R/tools/jackson/core/jackson-core/$JV/jackson-core-$JV.jar:\
 $R/tools/jackson/core/jackson-databind/$JV/jackson-databind-$JV.jar:\
 $R/com/github/mwiede/jsch/$SV/jsch-$SV.jar:\
-projects/shoring/compat/target/compat.jar:\
-projects/shoring/flywheel/target/flywheel.jar:\
-projects/shoring/fxapp/target/fxapp.jar:\
-projects/shoring/desk/target/desk.jar
+$R/com/panopset/compat/$PV/compat-$PV.jar:\
+$R/com/panopset/desk/$PV/desk-$PV.jar:\
+$R/com/panopset/flywheel/$PV/flywheel-$PV.jar:\
+$R/com/panopset/fxapp/$PV/fxapp-$PV.jar
 
 rm -rf target
 
@@ -74,6 +74,7 @@ export c="jpackage \
   --app-version $PV \
   --dest target/installer \
   $INSTALLER_XTR"
+echo $c
 eval $c
 
 export c="jpackage \
