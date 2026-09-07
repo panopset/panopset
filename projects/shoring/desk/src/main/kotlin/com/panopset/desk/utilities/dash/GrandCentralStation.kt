@@ -107,4 +107,31 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
         return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
             "projects/slab/pan/raw"))
     }
+
+    fun createSlabTemplateDriverFile(): File {
+        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
+            "projects/slab/pan/templates/driver.txt"))
+    }
+
+    fun createProjectsBeamDirectory(): File {
+        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
+            "projects/beam"))
+    }
+
+    fun createProjectsShoringDirectory(): File {
+        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
+            "projects/shoring"))
+    }
+
+    fun createTmpDirectory(): File {
+        val rtn = File(Fileop.combinePaths(projectDirectorySelector.createDir(), "tmp"))
+        if (rtn.exists()) {
+            if (rtn.isFile) {
+                Logz.errorMsg("tmp is a file, it should be a folder.", rtn)
+            }
+        } else {
+            rtn.mkdir()
+        }
+        return rtn
+    }
 }

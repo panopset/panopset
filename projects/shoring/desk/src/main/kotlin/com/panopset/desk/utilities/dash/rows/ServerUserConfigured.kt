@@ -20,9 +20,8 @@ class ServerUserConfigured(gcs: GrandCentralStation): Report(gcs) {
         val h = rhd.h
         val d = rhd.d
         val i = rhd.i
-        val tmpFile = File("./tmp")
+        val tmpFile = gcs.createTmpDirectory()
         val nginxFile = File("$tmpFile/$d")
-        tmpFile.deleteRecursively()
         Files.createDirectories(tmpFile.toPath())
         val fromScp = "/etc/nginx/sites-available/$d"
         val toScp = tmpFile.toPath().toString()

@@ -41,16 +41,29 @@ class Deployment(val gcs: GrandCentralStation) {
 
     fun publishBeam() {
         // TODO: assemble all environment variable checks in a single validation method.
+        val projectBaseDir = gcs.projectDirectorySelector.createDir()
         val userName = System.getenv()["PAN_SV_NM"]
         if (userName.isNullOrEmpty()) {
             Logz.errorMsg("PAN_SV_NM not defined as an environment variable. " +
                     "See docs/setup/env.md")
             return
         }
-        FlywheelBuilder().file(File("projects/slab/pan/templates/beam/beamService.txt"))
-            .targetDirectory(File("tmp/beam")).construct().exec()
-        val fromScp = "tmp/beam/"
-        val fromScpBeamJar = "projects/beam/target/beam.jar"
+        val beamServiceTemplateFile = File(Fileop.combinePaths(
+            projectBaseDir,
+            "/projects/slab/pan/templates/beam/beamService.txt"
+        ))
+        val tmpBeamDirectory = File(Fileop.combinePaths(
+            projectBaseDir,
+            "/tmp/beam"
+        ))
+        val beamJarFile = File(Fileop.combinePaths(
+            projectBaseDir,
+            "/projects/beam/target/beam.jar"
+        ))
+        FlywheelBuilder().file(beamServiceTemplateFile)
+            .targetDirectory(tmpBeamDirectory).construct().exec()
+        val fromScp = tmpBeamDirectory.absolutePath
+        val fromScpBeamJar = beamJarFile.absolutePath
         val toScp = "/home/$userName/"
         val fromScpFile = File(fromScp)
         if (fromScpFile.exists()) {
@@ -80,7 +93,11 @@ class Deployment(val gcs: GrandCentralStation) {
     }
 
     fun publishSite() {
-        val toScp = File("tmp/downloads")
+        val projectBaseDir = gcs.projectDirectorySelector.createDir()
+        val toScp = File(Fileop.combinePaths(
+            projectBaseDir,
+            "/tmp/downloads"
+        ))
         val fromScp = "/var/www/$d/html/downloads"
         opSecureCopyGet(
             rhd, toScp, fromScp, arrayListOf("json")
@@ -91,8 +108,13 @@ class Deployment(val gcs: GrandCentralStation) {
             "<h1>Prototype</h1>$d is currently serving as a prototype for the next release of " +
                     "<a href=\"https://panopset.com\">panopset.com</a>."
         }
-        FlywheelBuilder().file(File("projects/slab/pan/templates/driver.txt"))
-            .targetDirectory(File("tmp/html"))
+        FlywheelBuilder().file(
+            gcs.createSlabTemplateDriverFile()
+        )
+            .targetDirectory(File(Fileop.combinePaths(
+                projectBaseDir,
+                "/tmp/html"
+            )))
             .map("previewBlurb", blurb)
             .map("downloadsTable", GenerateDownloadsTable().createDownloadsTable("tmp/downloads"))
             .map("appVersion", AppVersion.getVersion())
