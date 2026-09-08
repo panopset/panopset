@@ -93,6 +93,7 @@ class Deployment(val gcs: GrandCentralStation) {
     }
 
     fun publishSite() {
+        val projectName = gcs.projectDir.name
         val projectBaseDir = gcs.projectDirectorySelector.createDir()
         val toScp = File(Fileop.combinePaths(
             projectBaseDir,
@@ -102,11 +103,11 @@ class Deployment(val gcs: GrandCentralStation) {
         opSecureCopyGet(
             rhd, toScp, fromScp, arrayListOf("json")
         )
-        val blurb = if (d == "panopset.com") {
+        val blurb = if (d == "$projectName.com") {
             ""
         } else {
             "<h1>Prototype</h1>$d is currently serving as a prototype for the next release of " +
-                    "<a href=\"https://panopset.com\">panopset.com</a>."
+                    "<a href=\"https://$d\">$d</a>."
         }
         FlywheelBuilder().file(
             gcs.createSlabTemplateDriverFile()
@@ -116,13 +117,17 @@ class Deployment(val gcs: GrandCentralStation) {
                 "/tmp/html"
             )))
             .map("previewBlurb", blurb)
-            .map("downloadsTable", GenerateDownloadsTable().createDownloadsTable("tmp/downloads"))
+            .map("downloadsTable", GenerateDownloadsTable().createDownloadsTable(toScp.canonicalPath))
             .map("appVersion", AppVersion.getVersion())
             .map("fullVersion", AppVersion.getFullVersion())
             .map("dashDate", dashDateFormat.format(Date()))
             .map("timestamp", timestampFormat.format((Date())))
-            .map(props2map(Fileop.loadProps(File("deploy.properties"))))
-            .construct().exec()
+            .map(props2map(Fileop.loadProps(
+                Fileop.combinePaths(
+                    projectBaseDir,
+                    "deploy.properties"
+                )
+            ))).construct().exec()
         opSecureCopyPut(rhd, "tmp/html", "/var/www/$d/html")
     }
 
