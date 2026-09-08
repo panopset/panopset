@@ -95,13 +95,17 @@ class Deployment(val gcs: GrandCentralStation) {
     fun publishSite() {
         val projectName = gcs.projectDir.name
         val projectBaseDir = gcs.projectDirectorySelector.createDir()
-        val toScp = File(Fileop.combinePaths(
+        val tmpDownloadsDir = File(Fileop.combinePaths(
             projectBaseDir,
             "/tmp/downloads"
         ))
+        val tmpHtmlDir = File(Fileop.combinePaths(
+            projectBaseDir,
+            "/tmp/html"
+        ))
         val fromScp = "/var/www/$d/html/downloads"
         opSecureCopyGet(
-            rhd, toScp, fromScp, arrayListOf("json")
+            rhd, tmpDownloadsDir, fromScp, arrayListOf("json")
         )
         val blurb = if (d == "$projectName.com") {
             ""
@@ -112,12 +116,9 @@ class Deployment(val gcs: GrandCentralStation) {
         FlywheelBuilder().file(
             gcs.createSlabTemplateDriverFile()
         )
-            .targetDirectory(File(Fileop.combinePaths(
-                projectBaseDir,
-                "/tmp/html"
-            )))
+            .targetDirectory(tmpHtmlDir)
             .map("previewBlurb", blurb)
-            .map("downloadsTable", GenerateDownloadsTable().createDownloadsTable(toScp.canonicalPath))
+            .map("downloadsTable", GenerateDownloadsTable(gcs).createDownloadsTable(tmpDownloadsDir.canonicalPath))
             .map("appVersion", AppVersion.getVersion())
             .map("fullVersion", AppVersion.getFullVersion())
             .map("dashDate", dashDateFormat.format(Date()))
@@ -128,7 +129,7 @@ class Deployment(val gcs: GrandCentralStation) {
                     "deploy.properties"
                 )
             ))).construct().exec()
-        opSecureCopyPut(rhd, "tmp/html", "/var/www/$d/html")
+        opSecureCopyPut(rhd, tmpHtmlDir.absolutePath, "/var/www/$d/html")
     }
 
     private fun publishDownloadsFor(osPath: String) {

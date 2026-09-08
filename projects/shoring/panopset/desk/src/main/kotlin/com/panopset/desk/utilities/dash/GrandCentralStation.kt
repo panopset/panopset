@@ -2,6 +2,7 @@ package com.panopset.desk.utilities.dash
 
 import com.panopset.compat.Fileop
 import com.panopset.compat.Logz
+import com.panopset.compat.Propop
 import com.panopset.compat.RemoteHostData
 import com.panopset.desk.utilities.dash.publish.Deployment
 import com.panopset.desk.utilities.dash.rows.Report

@@ -4,28 +4,30 @@ import com.panopset.compat.AppVersion
 import com.panopset.compat.Fileop
 import com.panopset.compat.Jsonop
 import com.panopset.compat.Propop
+import com.panopset.desk.utilities.dash.GrandCentralStation
 import com.panopset.marin.secure.checksums.ChecksumType
 import java.io.File
 import java.io.StringWriter
 import java.util.*
 
-class GenerateDownloadsTable {
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            GenerateDownloadsTable().createDownloadsTable("/var/www/html/downloads")
-        }
-    }
+class GenerateDownloadsTable(
+    val gcs: GrandCentralStation,
+) {
+    val projectDir = gcs.projectDir
 
     fun createDownloadsTable(path: String): String {
         val version = AppVersion.getFullVersion()
+        val deployPropsFile = File(Fileop.combinePaths(projectDir, "deploy.properties"))
+        val deployProps = Propop.load(deployPropsFile)
+        val sampleApp = deployProps["SPLAPP"]
         val platformDownloadMap = createPlatformDownloadMap(path)
         val sw = StringWriter()
         sw.append("<table>")
         for ((_, value) in platformDownloadMap) {
             val platformName = value.platformName
             val platformPropertiesFileName = "app$platformName.properties"
-            val props = Propop.load(File(platformPropertiesFileName))
+            val propsFile = File(Fileop.combinePaths(projectDir, platformPropertiesFileName))
+            val props = Propop.load(propsFile)
             val platformFullName = props.getProperty("PLATFORM_NAME").replace("\"", "")
             val launchPath = props.getProperty("LAUNCH_PATH").replace("\"", "")
             val javaCmd = props.getProperty("JAVA_CMD").replace("\"", "")
@@ -46,9 +48,9 @@ class GenerateDownloadsTable {
                 sw.append(sha512)
                 sw.append("\"></input></td></tr>")
                 if (firstTime) {
-                    sw.append("<tr><td colspan=\"2\"><pre>Launch path:</pre></td><td colspan=\"3\"><pre>${launchPath}flywheel</pre></td></tr>")
+                    sw.append("<tr><td colspan=\"2\"><pre>Launch path:</pre></td><td colspan=\"3\"><pre>$launchPath$sampleApp</pre></td></tr>")
                 } else {
-                    sw.append("<tr><td colspan=\"2\"><pre>Java command:</pre></td><td colspan=\"3\"><pre>$javaCmd flywheel</pre></td></tr>")
+                    sw.append("<tr><td colspan=\"2\"><pre>Java command:</pre></td><td colspan=\"3\"><pre>$javaCmd</pre></td></tr>")
                 }
                 firstTime = false
             }
