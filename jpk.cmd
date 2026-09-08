@@ -48,7 +48,6 @@ set c=jpackage ^
   --win-console ^
   --type msi ^
   --verbose
-
 %c%
 
 set c=jpackage ^
@@ -73,7 +72,6 @@ set c=jpackage ^
 --win-console ^
 --type app-image ^
 --verbose
-
 %c%
 
 target\standalone\panopset\gi.exe appwin

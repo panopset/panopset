@@ -5,7 +5,7 @@ if [%ERRORLEVEL%] neq [0] exit /b %ERRORLEVEL%
 call checkenv.cmd
 if [%ERRORLEVEL%] neq [0] exit /b %ERRORLEVEL%
 echo *******************************************************************
-echo *** Building shoring                                            ***
+echo *** Building %PAN%                                              ***
 echo *******************************************************************
 call mvn -f projects/shoring/%PAN%/ install
 if [%ERRORLEVEL%] neq [0] exit /b %ERRORLEVEL%
