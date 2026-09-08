@@ -43,15 +43,28 @@ class GenerateAppInfo {
 }
 
 private fun createTheStandaloneZipFile(props: Properties) {
+    val deployPropsFileName = "deploy.properties"
+    val deployPropsFile = File(deployPropsFileName)
+    if (!deployPropsFile.exists()) {
+        throw Exception("Props file ${deployPropsFile.canonicalPath} not found!")
+    }
+    val deployProps = Propop.load(deployPropsFile)
+    if (deployProps.isEmpty) {
+        throw Exception("Props file ${deployPropsFile.canonicalPath} is empty!")
+    }
+    val projectArtifactName = deployProps.getProperty("PAN")
+    if (projectArtifactName.isEmpty()) {
+        throw Exception("Project artifact name is empty!")
+    }
     val platformKey = props.getProperty("PLATFORM_KEY")
     if (platformKey == null) {
         Logz.errorMsg("PLATFORM_KEY is missing!")
         return
     }
     val arn = if (platformKey == "mac") {
-        "panopset.app"
+        "$projectArtifactName.app"
     } else {
-        "panopset"
+        projectArtifactName
     }
     val standAloneDirectory = Paths.get("target/standalone/$arn").toFile()
     val standAloneZip = Paths.get("target/standalone/$arn.zip").toFile()
