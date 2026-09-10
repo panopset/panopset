@@ -50,7 +50,7 @@ class GenerateDownloadsTable(
                 if (firstTime) {
                     sw.append("<tr><td colspan=\"2\"><pre>Launch path:</pre></td><td colspan=\"3\"><pre>$launchPath$sampleApp</pre></td></tr>")
                 } else {
-                    sw.append("<tr><td colspan=\"2\"><pre>Java command:</pre></td><td colspan=\"3\"><pre>$javaCmd</pre></td></tr>")
+                    sw.append("<tr><td colspan=\"2\"><pre>Launch command:</pre></td><td colspan=\"3\"><pre>$javaCmd</pre></td></tr>")
                 }
                 firstTime = false
             }
