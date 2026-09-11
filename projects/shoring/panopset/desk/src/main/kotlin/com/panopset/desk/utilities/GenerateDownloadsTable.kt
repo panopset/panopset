@@ -39,7 +39,7 @@ class GenerateDownloadsTable(
                 sw.append("\n\n<tr><td nowrap>\n")
                 sw.append(artifactType)
                 sw.append("</td><td nowrap>\n")
-                sw.append("<a href=\"/downloads/$artifactType/$platformShortKey/$artifactName\">$artifactName</a>")
+                sw.append("<a href=\"/downloads/$platformShortKey/$artifactType/$artifactName\">$artifactName</a>")
                 sw.append("</td><td>\n")
                 sw.append(version)
                 sw.append("</td><td>\n")
