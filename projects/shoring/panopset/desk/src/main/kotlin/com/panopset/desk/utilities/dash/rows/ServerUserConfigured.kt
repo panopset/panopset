@@ -7,6 +7,7 @@ import com.panopset.compat.Stringop
 import com.panopset.compat.doGetHttp
 import com.panopset.compat.opSecureCopyGet
 import com.panopset.desk.utilities.dash.GrandCentralStation
+import com.panopset.desk.utilities.dash.createFirstHtmlFileInstructions
 import com.panopset.desk.utilities.dash.genInitServerBlockText
 import com.panopset.desk.utilities.dash.sm.ServerState
 import java.io.File
@@ -58,7 +59,7 @@ class ServerUserConfigured(gcs: GrandCentralStation): Report(gcs) {
         var result: String
         if (nginxFile.exists()) {
             result = "nginx configured on $d at host $h, however SSL not set up yet.\n\n" +
-            genInitServerBlockText(d, u) + "\n\n" + createFirstHtmlFileInstructions()
+            genInitServerBlockText(d, u) + "\n"
             for (l in Fileop.readLines(nginxFile)) {
                 if (l.indexOf("ssl") > 1) {
                     val hrps: HttpResponsePackage = doGetHttp("https://${rhd.d}")
@@ -80,7 +81,7 @@ class ServerUserConfigured(gcs: GrandCentralStation): Report(gcs) {
                                     "Verify your ~/.ssh/config file entry for this server looks like:\n" +
                                     "Host $h\nHostName $i\nUser <root or $u>\nIdentityFile ~/.ssh/<your public key file>\n\n" +
                                     "Verify nginx is installed, up and running.\n" +
-                                    createFirstHtmlFileInstructions()
+                                    createFirstHtmlFileInstructions(d)
 
                         }
                         else -> {

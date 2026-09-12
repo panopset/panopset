@@ -111,7 +111,7 @@ class Deployment(val gcs: GrandCentralStation) {
             ""
         } else {
             "<h1>Prototype</h1>$d is currently serving as a prototype for the next release of " +
-                    "<a href=\"https://$d\">$d</a>."
+                    "<a href=\"https://panopset.com\">panopset.com</a>."
         }
         FlywheelBuilder().file(
             gcs.createSlabTemplateDriverFile()
