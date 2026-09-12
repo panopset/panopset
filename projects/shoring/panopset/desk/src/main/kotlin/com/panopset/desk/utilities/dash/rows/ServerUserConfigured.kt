@@ -7,7 +7,6 @@ import com.panopset.compat.Stringop
 import com.panopset.compat.doGetHttp
 import com.panopset.compat.opSecureCopyGet
 import com.panopset.desk.utilities.dash.GrandCentralStation
-import com.panopset.desk.utilities.dash.createCertbotCommandString
 import com.panopset.desk.utilities.dash.genInitServerBlockText
 import com.panopset.desk.utilities.dash.sm.ServerState
 import java.io.File
@@ -59,7 +58,7 @@ class ServerUserConfigured(gcs: GrandCentralStation): Report(gcs) {
         var result: String
         if (nginxFile.exists()) {
             result = "nginx configured on $d at host $h, however SSL not set up yet.\n\n" +
-            createCertbotCommandString(d) + "\n\n" + createFirstHtmlFileInstructions()
+            genInitServerBlockText(d, u) + "\n\n" + createFirstHtmlFileInstructions()
             for (l in Fileop.readLines(nginxFile)) {
                 if (l.indexOf("ssl") > 1) {
                     val hrps: HttpResponsePackage = doGetHttp("https://${rhd.d}")

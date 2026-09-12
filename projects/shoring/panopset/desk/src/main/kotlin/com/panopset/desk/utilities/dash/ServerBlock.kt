@@ -18,11 +18,11 @@ fun genInitServerBlockText(d: String, u: String): String {
     return serverBlockText
 }
 
-fun createCertbotCommandString(d: String): String {
+private fun createCertbotCommandString(d: String): String {
     return "sudo certbot --nginx -d $d -d www.$d"
 }
 
-fun genServerBlockLink(d: String): String {
+private fun genServerBlockLink(d: String): String {
     return "\nTo link your server block:" +
             "\nsudo ln -s /etc/nginx/sites-available/$d /etc/nginx/sites-enabled/\n\n"
 }
