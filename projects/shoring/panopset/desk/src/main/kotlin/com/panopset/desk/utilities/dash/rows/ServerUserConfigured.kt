@@ -105,7 +105,7 @@ class ServerUserConfigured(gcs: GrandCentralStation): Report(gcs) {
         val u = rhd.u
         return "Next step is to set up your initial server block.\n\nssh $h\n" +
                 "sudo vim $fromScp\n\n" +
-                genInitServerBlockText(d) + "\n" +
+                genInitServerBlockText(d, u) + "\n" +
                 REFRESH_PROMPT +
                 "$doc0\n$doc1"
     }

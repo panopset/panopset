@@ -1,6 +1,6 @@
 package com.panopset.desk.utilities.dash
 
-fun genInitServerBlockText(d: String): String {
+fun genInitServerBlockText(d: String, u: String): String {
     val serverBlockText =  "server {\n" +
             " listen 80;\n" +
             " listen [::]:80;\n" +
