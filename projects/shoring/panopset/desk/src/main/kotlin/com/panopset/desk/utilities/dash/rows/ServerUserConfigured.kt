@@ -106,9 +106,6 @@ class ServerUserConfigured(gcs: GrandCentralStation): Report(gcs) {
         return "Next step is to set up your initial server block.\n\nssh $h\n" +
                 "sudo vim $fromScp\n\n" +
                 genInitServerBlockText(d) + "\n" +
-                "sudo mkdir -p /var/www/$d/html\n" +
-                "sudo chown -R $u:$u /var/www/$d/html\n" +
-                "sudo chmod -R 755 /var/www/$d\n\n" +
                 REFRESH_PROMPT +
                 "$doc0\n$doc1"
     }

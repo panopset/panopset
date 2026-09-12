@@ -10,7 +10,11 @@ fun genInitServerBlockText(d: String): String {
             " location / {\n" +
             $$"  try_files $uri $uri/ =404;\n" +
             " }\n}\n" +
-            genServerBlockLink(d) + createCertbotCommandString(d)
+            genServerBlockLink(d) +
+            "sudo mkdir -p /var/www/$d/html\n" +
+            "sudo chown -R $u:$u /var/www/$d/html\n" +
+            "sudo chmod -R 755 /var/www/$d\n\n" +
+            createCertbotCommandString(d)
     return serverBlockText
 }
 
