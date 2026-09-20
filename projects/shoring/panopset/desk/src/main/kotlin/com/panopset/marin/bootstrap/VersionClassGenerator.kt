@@ -20,7 +20,7 @@ class VersionClassGenerator(private val srcDirectory: String, private var versio
     }
 
     private fun updatePoms() {
-        updatePom(0,"$panopsetSrcPath/pom.xml")
+        updatePom(1,"$panopsetSrcPath/pom.xml")
         updateShoringProject("compat")
         updateShoringProject("desk")
         updateShoringProject("flywheel")
