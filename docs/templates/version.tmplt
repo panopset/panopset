@@ -1,0 +1,29 @@
+package com.panopset.compat
+
+/**
+ * See deploy.properties comments for version upgrade procedure.
+ *
+ * This class is generated from version.tmplt.
+ */
+object AppVersion {
+
+    fun getVersion(): String {
+        return "${panopset_desk_version}"
+    }
+
+    fun getBuildNumber(): String {
+        return "${panopset_desk_build}"
+    }
+
+    fun getFullVersion(): String {
+        return getVersion() + "." + getBuildNumber()
+    }
+
+    @JvmStatic
+    fun main(vararg args: String?) {
+        if (args.isNotEmpty()) {
+            Logz.warn("AppVersion called with $args")
+        }
+        println(getVersion())
+    }
+}
