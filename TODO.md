@@ -1,3 +1,5 @@
 # TODO
 
-Dash state machine.
+* Versioning.
+* Replace skyscraper with dash in available applications.
+* Bring back the Kotlin documentation.

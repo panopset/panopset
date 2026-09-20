@@ -11,11 +11,12 @@ class ServerInfoRow(val gcs: GrandCentralStation) {
     val publishDownloadsBtn = gcs.publishDownloadsBtn
     val publishBeamBtn = gcs.publishBeamBtn
     val publishSiteBtn = gcs.publishSiteBtn
+    val publishReactBtn = gcs.publishReactBtn
 
     fun createRow(): HBox {
         gcs.disablePublishButtons()
         return PanComponentFactory.createPanHBox(
-            refreshBtn, publishRawBtn, publishDownloadsBtn, publishBeamBtn, publishSiteBtn
+            refreshBtn, publishRawBtn, publishDownloadsBtn, publishBeamBtn, publishSiteBtn, publishReactBtn
         )
     }
 }

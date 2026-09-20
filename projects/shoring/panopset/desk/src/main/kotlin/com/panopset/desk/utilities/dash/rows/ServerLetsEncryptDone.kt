@@ -6,20 +6,21 @@ import java.io.StringWriter
 
 class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
     override fun updateOutput() {
-        val rhd = gcs.createRemoteHostData()
         val slabRawDirectory = gcs.createSlabRawDirectory()
         val slabTemplateDriverFile = gcs.createSlabTemplateDriverFile()
         val projectsBeamDirectory = gcs.createProjectsBeamDirectory()
         val projectsShoringDirectory = gcs.createProjectsShoringDirectory()
+        val projectsPublicDirectory = gcs.createPublicDirectory()
         val isRawEnabled = slabRawDirectory.exists() && slabRawDirectory.isDirectory()
         val isBeamEnabled = projectsBeamDirectory.exists() && projectsBeamDirectory.isDirectory()
         val isDownloadEnabled = projectsShoringDirectory.exists() && projectsShoringDirectory.isDirectory()
-        val isHtmlEnabled = slabTemplateDriverFile.exists() && slabTemplateDriverFile.isFile()
+        val isSiteEnabled = slabTemplateDriverFile.exists() && slabTemplateDriverFile.isFile()
+        val isNodeEnabled = projectsPublicDirectory.exists() && projectsPublicDirectory.isDirectory()
         if (gcs.currentServerState == ServerState.LetsEncryptDone) {
             gcs.publishRawBtn.isDisable = !isRawEnabled
             gcs.publishDownloadsBtn.isDisable = !isDownloadEnabled
             gcs.publishBeamBtn.isDisable = !isBeamEnabled
-            gcs.publishSiteBtn.isDisable = !isHtmlEnabled
+            gcs.publishSiteBtn.isDisable = !isSiteEnabled
         }
         val sw = StringWriter()
         if (isRawEnabled) {
@@ -37,11 +38,18 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
         } else {
             sw.append("Beam disabled because there is no ${projectsBeamDirectory.absolutePath} Springboot project.\n")
         }
-        if (isHtmlEnabled) {
+        if (isSiteEnabled) {
             sw.append("Ready to publish website!\n")
+            sw.append("Node disabled because this is a nginx served website.\n")
         } else {
-            sw.append("Html disabled because there is no Flywheel template driver file for the website:\n" +
+            sw.append("Site disabled because there is no Flywheel template driver file for the website:\n" +
                     "     ${slabTemplateDriverFile.absolutePath}.\n")
+            if (isNodeEnabled) {
+                sw.append("Ready to publish Node website!\n")
+            } else {
+                sw.append("Node disabled because there is no public folder:\n" +
+                        "     ${projectsPublicDirectory.absolutePath}.\n")
+            }
         }
         showStateReport(sw.toString())
     }

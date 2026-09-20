@@ -55,22 +55,24 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
         {
             val deployment = Deployment(this)
             deployment.publishSite()
-        }, "Site", false, "Publish website.")
+        }, "Site", false, "Publish static website.")
+    val publishReactBtn = PanComponentFactory.createPanButton(fxDoc,
+        {
+            val deployment = Deployment(this)
+            deployment.publishSite()
+        }, "Node", false, "Publish node website.")
     fun disablePublishButtons() {
         publishRawBtn.isDisable = true
         publishDownloadsBtn.isDisable = true
         publishBeamBtn.isDisable = true
         publishSiteBtn.isDisable = true
+        publishReactBtn.isDisable = true
     }
     fun updateOutput() {
         disablePublishButtons()
         currentServerState = ServerState.Initial
-
-        // TODO: There has to be a more general, better way to do this, without affecting apps that want to save
-        //       error messages between launches.
         Logz.clear()
         fxDoc.fxDocMessage.setMsg("")
-
         server.state = ServerState.Unknown
         var report: Report
         while (currentServerState != server.state) {
@@ -105,27 +107,27 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
     }
 
     fun createSlabRawDirectory(): File {
-        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
-            "projects/slab/pan/raw"))
+        return createProjectFile("projects/slab/pan/raw")
     }
 
     fun createSlabTemplateDriverFile(): File {
-        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
-            "projects/slab/pan/templates/driver.txt"))
+        return createProjectFile("projects/slab/pan/templates/driver.txt")
     }
 
     fun createProjectsBeamDirectory(): File {
-        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
-            "projects/beam"))
+        return createProjectFile("projects/beam")
     }
 
     fun createProjectsShoringDirectory(): File {
-        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),
-            "projects/shoring"))
+        return createProjectFile("projects/shoring")
+    }
+
+    fun createPublicDirectory(): File {
+        return createProjectFile("projects/public")
     }
 
     fun createTmpDirectory(): File {
-        val rtn = File(Fileop.combinePaths(projectDirectorySelector.createDir(), "tmp"))
+        val rtn = createProjectFile("tmp")
         if (rtn.exists()) {
             if (rtn.isFile) {
                 Logz.errorMsg("tmp is a file, it should be a folder.", rtn)
@@ -134,5 +136,9 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
             rtn.mkdir()
         }
         return rtn
+    }
+
+    private fun createProjectFile(subPath: String): File {
+        return File(Fileop.combinePaths(projectDirectorySelector.createDir(),subPath))
     }
 }

@@ -29,6 +29,9 @@ object SshConfig {
                 when (key) {
                     "Host" -> {
                         host = value
+                        hostName = ""
+                        user = ""
+                        identityFile = ""
                     }
                     "HostName" -> {
                         hostName = value

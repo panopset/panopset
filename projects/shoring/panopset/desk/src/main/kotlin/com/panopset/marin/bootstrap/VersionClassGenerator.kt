@@ -19,17 +19,19 @@ class VersionClassGenerator(private val srcDirectory: String, private var versio
 
     private fun updatePoms() {
         updatePom("$srcDirectory/projects/shoring/pom.xml")
-        updateProject("compat")
-        updateProject("blackjackEngine")
-        updateProject("flywheel")
-        updateProject("fxapp")
-        updateProject("desk")
-        updateProject("cms")
-        updatePom("$srcDirectory/projects/fas21/blackjackEngine/pom.xml")
-        //updatePomSecond("$srcDirectory/projects/beam/pom.xml")
+        updateShoringProject("compat")
+        updateShoringProject("blackjackEngine")
+        updateShoringProject("flywheel")
+        updateShoringProject("fxapp")
+        updateShoringProject("desk")
+        updateShoringProject("cms")
+        updateShoringProject("$srcDirectory/projects/beam/pom.xml")
+        updatePom("$srcDirectory/../fas21/projects/shoring/fas21/pom.xml")
+        updatePom("$srcDirectory/../fas21/projects/shoring/fas21/fsbengine/pom.xml")
+        updatePom("$srcDirectory/../fas21/projects/shoring/fas21/fsbdesk/pom.xml")
     }
 
-    private fun updateProject(project: String) {
+    private fun updateShoringProject(project: String) {
         val pp = "$srcDirectory/projects/shoring/$project/pom.xml"
         updatePom(pp)
     }
