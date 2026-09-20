@@ -27,3 +27,4 @@ object AppVersion {
         println(getVersion())
     }
 }
+

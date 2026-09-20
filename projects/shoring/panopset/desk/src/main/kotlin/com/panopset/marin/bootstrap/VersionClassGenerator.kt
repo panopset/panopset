@@ -3,7 +3,7 @@ package com.panopset.marin.bootstrap
 import com.panopset.compat.Fileop
 import com.panopset.compat.Logz
 import com.panopset.compat.Stringop.isPopulated
-import com.panopset.compat.Stringop.replaceFirstLinePreserveIndentation
+import com.panopset.compat.Stringop.replaceLine
 import com.panopset.desk.DeployProperties
 import com.panopset.flywheel.FlywheelBuilder
 import java.io.File
@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class VersionClassGenerator(private val srcDirectory: String, private var versionString: String) {
+    val panopsetSrcPath = "$srcDirectory/projects/shoring/panopset"
+
     private fun updateVersion() {
         if (updateAppVersionClass()) {
             updatePoms()
@@ -18,41 +20,47 @@ class VersionClassGenerator(private val srcDirectory: String, private var versio
     }
 
     private fun updatePoms() {
-        updatePom("$srcDirectory/projects/shoring/pom.xml")
+        updatePom(0,"$panopsetSrcPath/pom.xml")
         updateShoringProject("compat")
-        updateShoringProject("blackjackEngine")
+        updateShoringProject("desk")
         updateShoringProject("flywheel")
         updateShoringProject("fxapp")
-        updateShoringProject("desk")
-        updateShoringProject("cms")
-        updateShoringProject("$srcDirectory/projects/beam/pom.xml")
-        updatePom("$srcDirectory/../fas21/projects/shoring/fas21/pom.xml")
-        updatePom("$srcDirectory/../fas21/projects/shoring/fas21/fsbengine/pom.xml")
-        updatePom("$srcDirectory/../fas21/projects/shoring/fas21/fsbdesk/pom.xml")
+        updatePom(2,"$srcDirectory/projects/beam/pom.xml")
+        updatePom(1,"$srcDirectory/../fas21/projects/shoring/fas21/pom.xml")
+        updatePom(1,"$srcDirectory/../fas21/projects/shoring/fas21/fsbengine/pom.xml")
+        updatePom(1,"$srcDirectory/../fas21/projects/shoring/fas21/fsbdesk/pom.xml")
     }
 
     private fun updateShoringProject(project: String) {
-        val pp = "$srcDirectory/projects/shoring/$project/pom.xml"
-        updatePom(pp)
+        val pp = "$panopsetSrcPath/$project/pom.xml"
+        updatePom(1, pp)
     }
 
-    private fun updatePom(pp: String) {
+    private fun updatePom(
+        expectedOccurrenceToReplaceNaturalNumber: Int,
+        pp: String
+    ) {
         println("Updating: $pp")
         val fr = "<version>"
         val tm = "<version>%s</version>"
         val vr = getVersionString()
-        replaceFirstLine(pp, fr, String.format(tm, vr))
+        replacePomLine(pp, fr, expectedOccurrenceToReplaceNaturalNumber,
+            String.format(tm, vr))
     }
 
-    private fun replaceFirstLine(
+    private fun replacePomLine(
         path: String, lineToReplaceContaining: String,
+        expectedOccurrenceToReplaceNaturalNumber: Int,
         fullReplacementLine: String
     ) {
         val file = File(path)
+        if (!file.exists()) {
+            throw RuntimeException("File does not exist: $path")
+        }
         val source = Fileop.readLines( file)
-        val strs = replaceFirstLinePreserveIndentation(
+        val strs = replaceLine(
             source,
-            lineToReplaceContaining, fullReplacementLine
+            lineToReplaceContaining, expectedOccurrenceToReplaceNaturalNumber, fullReplacementLine
         )
         if (source == strs) {
             Logz.info(String.format("No changes to %s, skipping...", path))
@@ -63,7 +71,11 @@ class VersionClassGenerator(private val srcDirectory: String, private var versio
     }
 
     private fun updateAppVersionClass(): Boolean {
-        val vf = File("$srcDirectory/projects/shoring/compat/src/main/kotlin/com/panopset/compat/AppVersion.kt")
+        val vf = File("$srcDirectory/projects/shoring/panopset/compat/src/main/kotlin/com/panopset/compat/AppVersion.kt")
+        if (!vf.exists()) {
+            Logz.errorMsg("File not found", vf)
+            return false
+        }
         if (!vf.parentFile.exists()) {
             Logz.errorMsg("Parent directory not found", vf)
             return false
@@ -93,7 +105,12 @@ class VersionClassGenerator(private val srcDirectory: String, private var versio
 
         @JvmStatic
         fun main(args: Array<String>) {
-            VersionClassGenerator(args[0], DeployProperties().getPanopsetVersion()).updateVersion()
+            val srcDirectory = if (args.isEmpty()) {
+                "."
+            } else {
+                args[0]
+            }
+            VersionClassGenerator(srcDirectory, DeployProperties().getPanopsetVersion()).updateVersion()
         }
     }
 }

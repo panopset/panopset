@@ -346,25 +346,30 @@ object Stringop {
         return source.replace(target.toRegex(), replacement!!)
     }
 
-    fun replaceFirstLinePreserveIndentation(
+    fun replaceLine(
         source: List<String>, lineToReplaceContaining: String,
+        expectedOccurrenceToReplaceNaturalNumber: Int,
         fullReplacementLine: String
     ): List<String> {
-        var firstTime = true
+        var currentOccurrenceToReplace = 0
         var priorIndentation = ""
         val rtn: MutableList<String> = ArrayList()
         for (str in source) {
-            if (firstTime) {
+            if (currentOccurrenceToReplace < expectedOccurrenceToReplaceNaturalNumber) {
                 if (str.contains(lineToReplaceContaining)) {
-                    firstTime = false
-                    rtn.add(String.format("%s%s", priorIndentation, fullReplacementLine))
+                    currentOccurrenceToReplace++
+                    if (currentOccurrenceToReplace == expectedOccurrenceToReplaceNaturalNumber) {
+                        rtn.add(String.format("%s%s", priorIndentation, fullReplacementLine))
+                    } else {
+                        rtn.add(str)
+                    }
                 } else {
                     rtn.add(str)
-                    priorIndentation = getIndentation(str)
                 }
             } else {
                 rtn.add(str)
             }
+            priorIndentation = getIndentation(str)
         }
         return rtn
     }

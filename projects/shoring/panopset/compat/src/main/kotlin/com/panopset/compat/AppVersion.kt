@@ -8,11 +8,11 @@ package com.panopset.compat
 object AppVersion {
 
     fun getVersion(): String {
-        return "1.7.0"
+        return "1.7.1"
     }
 
     fun getBuildNumber(): String {
-        return "202512290711"
+        return "202609200805"
     }
 
     fun getFullVersion(): String {
@@ -22,7 +22,7 @@ object AppVersion {
     @JvmStatic
     fun main(vararg args: String?) {
         if (args.isNotEmpty()) {
-            Logz.yellow("AppVersion called with $args")
+            Logz.warn("AppVersion called with $args")
         }
         println(getVersion())
     }
