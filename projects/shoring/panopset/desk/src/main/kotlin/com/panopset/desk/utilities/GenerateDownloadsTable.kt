@@ -16,7 +16,6 @@ class GenerateDownloadsTable(
     val projectDir = gcs.projectDir
 
     fun createDownloadsTable(path: String): String {
-        val version = AppVersion.getFullVersion()
         val deployPropsFile = File(Fileop.combinePaths(projectDir, "deploy.properties"))
         val deployProps = Propop.load(deployPropsFile)
         val sampleApp = deployProps["SPLAPP"]
@@ -35,7 +34,7 @@ class GenerateDownloadsTable(
             sw.append("<tr><th>Type</th><th>Download</th><th>Version</th><th>Bytes</th>")
             sw.append("<th>SHA-512</th></tr>")
             var firstTime = true
-            for ((artifactType, platformShortKey, artifactName, byteCount, sha512) in value.platformDownloads) {
+            for ((artifactType, platformShortKey, artifactName, byteCount, sha512, version) in value.platformDownloads) {
                 sw.append("\n\n<tr><td nowrap>\n")
                 sw.append(artifactType)
                 sw.append("</td><td nowrap>\n")
@@ -122,9 +121,10 @@ class GenerateDownloadsTable(
 
         val bytes = map["bytes"] ?: return platformDownloadMap
         val sha512 = map[ChecksumType.SHA512.key] ?: return platformDownloadMap
+        val version = map["version"] ?: return platformDownloadMap
 
         addPlatformIfNecessary(platformDisplayOrder, platformKey, platformDownloadMap).platformDownloads.add(
-            PlatformDownload(artifactType, platformShortKey,ifn, bytes, sha512)
+            PlatformDownload(artifactType, platformShortKey,ifn, bytes, sha512, version)
         )
         return platformDownloadMap
     }
@@ -157,6 +157,7 @@ private data class PlatformDownload(
     val artifactName: String,
     val byteCount: String,
     val sha512: String,
+    val version: String,
 )
 
 private data class PlatformDownloadCollection(
