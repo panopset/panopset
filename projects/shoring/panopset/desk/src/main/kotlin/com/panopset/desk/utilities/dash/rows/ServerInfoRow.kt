@@ -11,7 +11,7 @@ class ServerInfoRow(val gcs: GrandCentralStation) {
     val publishDownloadsBtn = gcs.publishDownloadsBtn
     val publishBeamBtn = gcs.publishBeamBtn
     val publishSiteBtn = gcs.publishSiteBtn
-    val publishReactBtn = gcs.publishReactBtn
+    val publishReactBtn = gcs.publishNodeBtn
 
     fun createRow(): HBox {
         gcs.disablePublishButtons()

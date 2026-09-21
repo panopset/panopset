@@ -21,6 +21,7 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
             gcs.publishDownloadsBtn.isDisable = !isDownloadEnabled
             gcs.publishBeamBtn.isDisable = !isBeamEnabled
             gcs.publishSiteBtn.isDisable = !isSiteEnabled
+            gcs.publishNodeBtn.isDisable = !isNodeEnabled
         }
         val sw = StringWriter()
         if (isRawEnabled) {

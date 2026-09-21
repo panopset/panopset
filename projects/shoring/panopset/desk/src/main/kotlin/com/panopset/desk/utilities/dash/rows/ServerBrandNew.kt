@@ -12,6 +12,11 @@ class ServerBrandNew(gcs: GrandCentralStation): Report(gcs) {
         val u = Stringop.USN
         val configValues = SshConfig.getConfigForIP(i)
         val h = configValues[CONFIG_HOST_INDEX]
+        val serverExtraInstalls = if (gcs.isNodeProject()) {
+            "nodejs\nnode --version (should be at least v22)\n"
+        } else {
+            "openjdk-25-jre-headless"
+        }
         val report = "Host defined in ~/.ssh/config is: $h\n\nFull config is:\n\n" +
                 getConfigString(configValues) + "\n\n" +
                 "IMPORTANT: Make sure you delete known_hosts if you swapped servers under a reserved IP:\n\n" +
@@ -24,7 +29,7 @@ class ServerBrandNew(gcs: GrandCentralStation): Report(gcs) {
                 "sudo reboot 0\n" +
                 "(Take a short stretch break)\n" +
                 "ssh $h\n" +
-                "apt -y install nginx net-tools certbot python3-certbot-nginx openjdk-25-jre-headless\n" +
+                "apt -y install nginx net-tools certbot python3-certbot-nginx $serverExtraInstalls\n" +
                 "ufw allow OpenSSH\n" +
                 "ufw allow 'Nginx Full'\n" +
                 "ufw app list\n" +

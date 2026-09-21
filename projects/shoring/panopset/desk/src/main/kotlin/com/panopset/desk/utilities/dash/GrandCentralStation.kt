@@ -2,7 +2,6 @@ package com.panopset.desk.utilities.dash
 
 import com.panopset.compat.Fileop
 import com.panopset.compat.Logz
-import com.panopset.compat.Propop
 import com.panopset.compat.RemoteHostData
 import com.panopset.desk.utilities.dash.publish.Deployment
 import com.panopset.desk.utilities.dash.rows.Report
@@ -56,17 +55,17 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
             val deployment = Deployment(this)
             deployment.publishSite()
         }, "Site", false, "Publish static website.")
-    val publishReactBtn = PanComponentFactory.createPanButton(fxDoc,
+    val publishNodeBtn = PanComponentFactory.createPanButton(fxDoc,
         {
             val deployment = Deployment(this)
-            deployment.publishSite()
+            deployment.publishNode()
         }, "Node", false, "Publish node website.")
     fun disablePublishButtons() {
         publishRawBtn.isDisable = true
         publishDownloadsBtn.isDisable = true
         publishBeamBtn.isDisable = true
         publishSiteBtn.isDisable = true
-        publishReactBtn.isDisable = true
+        publishNodeBtn.isDisable = true
     }
     fun updateOutput() {
         disablePublishButtons()
@@ -123,7 +122,7 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
     }
 
     fun createPublicDirectory(): File {
-        return createProjectFile("projects/public")
+        return createProjectFile("public")
     }
 
     fun createTmpDirectory(): File {
@@ -140,5 +139,10 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
 
     private fun createProjectFile(subPath: String): File {
         return File(Fileop.combinePaths(projectDirectorySelector.createDir(),subPath))
+    }
+
+    fun isNodeProject(): Boolean {
+        val publicDirectory = createPublicDirectory()
+        return publicDirectory.exists() && publicDirectory.isDirectory
     }
 }
