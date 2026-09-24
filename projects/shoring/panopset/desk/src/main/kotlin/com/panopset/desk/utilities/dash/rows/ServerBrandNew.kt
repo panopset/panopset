@@ -13,7 +13,7 @@ class ServerBrandNew(gcs: GrandCentralStation): Report(gcs) {
         val configValues = SshConfig.getConfigForIP(i)
         val h = configValues[CONFIG_HOST_INDEX]
         val serverExtraInstalls = if (gcs.isNodeProject()) {
-            "nodejs\nnode --version (should be at least v22)\n"
+            "build-essential npm nodejs\nnode --version (should be at least v22)\n"
         } else {
             "openjdk-25-jre-headless"
         }

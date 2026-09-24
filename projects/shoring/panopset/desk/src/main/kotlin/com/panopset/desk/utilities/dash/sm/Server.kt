@@ -10,6 +10,6 @@ class Server {
     }
 
     override fun toString(): String {
-        return "${state.title} \n\n$message"
+        return "${state.title} \n$message"
     }
 }
