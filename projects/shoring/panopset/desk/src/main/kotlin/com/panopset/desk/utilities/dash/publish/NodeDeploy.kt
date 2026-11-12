@@ -23,7 +23,7 @@ class NodeDeploy(val gcs: GrandCentralStation) {
         scp("package.json")
         scp("package-lock.json")
         scpDir("src")
-        scpDir("public")
+        scpDir("dist")
     }
 
     private fun scp(artifact: String) {

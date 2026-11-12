@@ -1,7 +1,5 @@
 package com.panopset.desk.utilities.dash
 
-import com.panopset.desk.utilities.dash.rows.REFRESH_PROMPT
-
 fun genInitServerBlockText(d: String, u: String): String {
     val serverBlockText =  "server {\n" +
             " listen 80;\n" +
