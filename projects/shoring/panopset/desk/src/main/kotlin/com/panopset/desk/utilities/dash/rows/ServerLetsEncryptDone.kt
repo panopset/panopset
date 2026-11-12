@@ -9,7 +9,7 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
     val h = rhd.h
     val u = rhd.u
     val d = rhd.d
-    val projectName = gcs.projectDir.name
+    val projectName = gcs.lorpProjectDir()
 
     override fun updateOutput() {
         val slabRawDirectory = gcs.createSlabRawDirectory()
@@ -17,11 +17,14 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
         val projectsBeamDirectory = gcs.createProjectsBeamDirectory()
         val projectsShoringDirectory = gcs.createProjectsShoringDirectory()
         val projectsPublicDirectory = gcs.createPublicDirectory()
+        val projectsDistDirectory = gcs.createDistDirectory()
         val isRawEnabled = slabRawDirectory.exists() && slabRawDirectory.isDirectory()
         val isBeamEnabled = projectsBeamDirectory.exists() && projectsBeamDirectory.isDirectory()
         val isDownloadEnabled = projectsShoringDirectory.exists() && projectsShoringDirectory.isDirectory()
         val isSiteEnabled = slabTemplateDriverFile.exists() && slabTemplateDriverFile.isFile()
-        val isNodeEnabled = projectsPublicDirectory.exists() && projectsPublicDirectory.isDirectory()
+        val isNodeEnabled =
+            (projectsPublicDirectory.exists() && projectsPublicDirectory.isDirectory()) ||
+                    (projectsDistDirectory.exists() && projectsDistDirectory.isDirectory())
         if (gcs.currentServerState == ServerState.LetsEncryptDone) {
             gcs.publishRawBtn.isDisable = !isRawEnabled
             gcs.publishDownloadsBtn.isDisable = !isDownloadEnabled

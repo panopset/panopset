@@ -13,16 +13,16 @@ class ServerUnknown(gcs: GrandCentralStation): Report(gcs) {
             )
             return
         }
-        gcs.projectDir = gcs.projectDirectorySelector.createDir()
-        if (!(gcs.projectDir.exists())) {
+        val projectDir = gcs.projectDirectorySelector.createDir()
+        if (!(projectDir.exists())) {
             gcs.server.setStateWithMessage(ServerState.Invalid,
-                "Directory ${gcs.projectDir.canonicalPath} does not exist."
+                "Directory ${projectDir.canonicalPath} does not exist."
             )
             return
         }
-        if (!(gcs.projectDir.isDirectory())) {
+        if (!(projectDir.isDirectory())) {
             gcs.server.setStateWithMessage(ServerState.Invalid,
-                "${gcs.projectDir.canonicalPath} is not a directory."
+                "${projectDir.canonicalPath} is not a directory."
             )
             return
         }

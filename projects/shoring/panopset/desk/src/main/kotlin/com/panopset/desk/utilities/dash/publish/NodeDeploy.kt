@@ -11,8 +11,8 @@ class NodeDeploy(val gcs: GrandCentralStation) {
     val rhd = gcs.createRemoteHostData()
     val d = rhd.d
     val u = rhd.u
-    val projectName = gcs.projectDir.name
     val projectBaseDir = gcs.projectDirectorySelector.createDir()
+    val projectName = gcs.lorpProjectDir()
 
     fun publish() {
         generateServiceFile()

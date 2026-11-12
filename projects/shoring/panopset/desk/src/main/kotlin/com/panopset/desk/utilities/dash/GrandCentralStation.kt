@@ -21,7 +21,7 @@ import java.io.File
 
 class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) {
     var currentServerState = ServerState.Initial
-    var projectDir: File = File(System.getProperty("user.dir"))
+    var launchDir: File = File(System.getProperty("user.dir"))
     var server = Server()
     val projectDirectorySelector = PanDirSelectorPanel(fxDoc, "projectDirectory", "Project")
     val outputTA = PanComponentFactory.createPanTextArea(fxDoc)
@@ -90,6 +90,11 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
         }
     }
 
+    fun lorpProjectDir(): String {
+        val rtn = File(projectDirectorySelector.inputFile.text).name
+        return rtn;
+    }
+
     fun createRemoteHostData(): RemoteHostData {
         return createRemoteHostData(ipTF.text, domainTF.text)
     }
@@ -123,6 +128,10 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
 
     fun createPublicDirectory(): File {
         return createProjectFile("public")
+    }
+
+    fun createDistDirectory(): File {
+        return createProjectFile("dist")
     }
 
     fun createTmpDirectory(): File {

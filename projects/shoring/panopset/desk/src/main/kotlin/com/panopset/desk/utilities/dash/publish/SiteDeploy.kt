@@ -17,7 +17,7 @@ class SiteDeploy(val gcs: GrandCentralStation) {
     val d = rhd.d
 
     fun publish() {
-        val projectName = gcs.projectDir.name
+        val projectName = gcs.lorpProjectDir()
         val projectBaseDir = gcs.projectDirectorySelector.createDir()
         val tmpDownloadsDir = File(Fileop.combinePaths(
             projectBaseDir,

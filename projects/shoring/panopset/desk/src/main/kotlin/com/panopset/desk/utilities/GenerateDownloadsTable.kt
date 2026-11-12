@@ -1,6 +1,5 @@
 package com.panopset.desk.utilities
 
-import com.panopset.compat.AppVersion
 import com.panopset.compat.Fileop
 import com.panopset.compat.Jsonop
 import com.panopset.compat.Propop
@@ -13,7 +12,8 @@ import java.util.*
 class GenerateDownloadsTable(
     val gcs: GrandCentralStation,
 ) {
-    val projectDir = gcs.projectDir
+    val projectDir =
+        File(gcs.projectDirectorySelector.inputFile.text).name
 
     fun createDownloadsTable(path: String): String {
         val deployPropsFile = File(Fileop.combinePaths(projectDir, "deploy.properties"))

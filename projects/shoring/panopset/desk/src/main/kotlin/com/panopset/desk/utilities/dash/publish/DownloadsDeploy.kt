@@ -21,7 +21,7 @@ class DownloadsDeploy(val gcs: GrandCentralStation) {
     }
 
     private fun publishDownloadsFor(osPath: String) {
-        val projectName = gcs.projectDir.name
+        val projectName = gcs.lorpProjectDir()
         val projectBaseDir = gcs.projectDirectorySelector.createDir()
         val fromScpFile = File(Fileop.combinePaths(
             projectBaseDir,
