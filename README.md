@@ -35,16 +35,16 @@ Once everything is set up, then you can update and build:
 
 ## Scripts
 
-| Linux/Mac   | Windows    | Purpose                                     |
-|-------------|------------|---------------------------------------------|
-| ./setup.sh  | setup.cmd  | One time workstation setup.                 |
-| ./allgit.sh | allgit.cmd | Update the git repo and run the all script. |
-| ./all.sh    | all.cmd    | Run the clean, build and jpk scripts.       |
-| ./clean.sh  | clean.cmd  | Clean target directories.                   |
-| ./update.sh | update.cmd | Git update.                                 |
-| ./build.sh  | build.cmd  | Build desktop and beam.                     |
-| ./jpk.sh    | jpk.cmd    | Create an installer for this platform.       |
-| ./generateVersion.sh| N/A | Only run on the Linux platform, prepare next veraion. | 
+| Linux/Mac   | Windows     | Purpose                                           |
+|-------------|-------------|---------------------------------------------------|
+| ./setup.sh  | setup.cmd   | One time workstation setup.                       |
+| ./allgit.sh | allgit.cmd  | Update the git repo and run the all script.       |
+| ./all.sh    | all.cmd     | Run the clean, build and jpk scripts.             |
+| ./clean.sh  | clean.cmd   | Clean target directories.                         |
+| ./update.sh | update.cmd  | Git update.                                       |
+| ./build.sh  | build.cmd   | Build desktop and beam.                           |
+| ./jpk.sh    | jpk.cmd     | Create an installer for this platform.            |
+| ./generateVersion.sh| Linux only. | Prepare next version, based on deploy.properties. | 
 
 ## Requirements:
 
