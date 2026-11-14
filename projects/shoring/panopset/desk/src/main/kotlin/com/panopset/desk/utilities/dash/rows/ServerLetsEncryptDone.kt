@@ -10,6 +10,7 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
     val u = rhd.u
     val d = rhd.d
     val projectName = gcs.lorpProjectDir()
+    val si = ServerInfo(gcs)
 
     override fun updateOutput() {
         val slabRawDirectory = gcs.createSlabRawDirectory()
@@ -22,15 +23,15 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
         val isBeamEnabled = projectsBeamDirectory.exists() && projectsBeamDirectory.isDirectory()
         val isDownloadEnabled = projectsShoringDirectory.exists() && projectsShoringDirectory.isDirectory()
         val isSiteEnabled = slabTemplateDriverFile.exists() && slabTemplateDriverFile.isFile()
-        val isNodeEnabled =
-            (projectsPublicDirectory.exists() && projectsPublicDirectory.isDirectory()) ||
-                    (projectsDistDirectory.exists() && projectsDistDirectory.isDirectory())
+        val isNodeEnabled = projectsPublicDirectory.exists() && projectsPublicDirectory.isDirectory()
+        val isNodeStaticEnabled = projectsDistDirectory.exists() && projectsDistDirectory.isDirectory()
         if (gcs.currentServerState == ServerState.LetsEncryptDone) {
             gcs.publishRawBtn.isDisable = !isRawEnabled
             gcs.publishDownloadsBtn.isDisable = !isDownloadEnabled
             gcs.publishBeamBtn.isDisable = !isBeamEnabled
             gcs.publishSiteBtn.isDisable = !isSiteEnabled
             gcs.publishNodeBtn.isDisable = !isNodeEnabled
+            gcs.publishNodeStaticBtn.isDisable = !isNodeStaticEnabled
         }
         val sw = StringWriter()
         if (isRawEnabled) {
@@ -48,6 +49,11 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
         } else {
             sw.append("Beam disabled because there is no ${projectsBeamDirectory.absolutePath} Springboot project.\n")
         }
+        if (isNodeStaticEnabled) {
+            sw.append("Ready to publish Node Static!\n")
+        } else {
+            sw.append("Node static disabled because there is no ${projectsDistDirectory.absolutePath}.\n")
+        }
         if (isSiteEnabled) {
             sw.append("Ready to publish website!\n")
             sw.append("Node disabled because this is a nginx served website.\n")
@@ -57,11 +63,7 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
             if (isNodeEnabled) {
                 sw.append("\nThe server is ready to publish your Javascript Node project, " +
                         "but there are some things we need to do before pressing the Node button:\n\n" +
-                        "We'll need a place to deploy the application:\n" +
-                        "    ssh $h\n" +
-                        "If this is a re-deploy, you just need to clear the deployment directory:\n" +
-                        "    rm -rf /opt/$projectName-node/*\n" +
-                        "If this is the first deployment, you need to create the deployment directory,\n" +
+                        si.deploymentSetupInstructions() +
                         "Once all that is done, ready to publish Node website,\n" +
                         "by clicking the Node button above right.\n" +
                         "Then: \n" +
@@ -79,19 +81,21 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
                         "    sudo nginx -t\n" +
                         "    sudo reboot 0\n" +
                         "You don't want to have to manually start it each time, so install the service:\n" +
-                        "    cd\n" +
-                        "    sudo mkdir /opt/$projectName-node\n" +
-                        "    sudo chown $u:$u /opt/$projectName-node\n" +
-                        "    sudo mv $projectName-node.service /etc/systemd/system/\n" +
-                        "    sudo systemctl daemon-reload\n" +
-                        "    sudo systemctl enable --now $projectName-node\n" +
-                        "    sudo systemctl status $projectName-node\n" +
-                        "    sudo reboot 0\n" +
+                        si.installServiceInstructions() +
                         "\n" +
                         "")
             } else {
                 sw.append("Node disabled because there is no public folder:\n" +
-                        "     ${projectsPublicDirectory.absolutePath}.\n")
+                        "     ${projectsPublicDirectory.absolutePath}.\n" +
+                        si.lineSep() +
+                        "General Instructions\n" +
+                        si.lineSep() +
+                        "Deployment setup\n" +
+                        si.deploymentSetupInstructions() +
+                        si.lineSep() +
+                        "Install Service:\n" +
+                        si.installServiceInstructions()
+                )
             }
         }
         showStateReport(sw.toString())

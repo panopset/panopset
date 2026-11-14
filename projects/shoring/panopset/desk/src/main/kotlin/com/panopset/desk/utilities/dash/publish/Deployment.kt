@@ -11,4 +11,5 @@ class Deployment(val gcs: GrandCentralStation) {
     fun publishDownloads() {DownloadsDeploy(gcs).publish()}
     fun publishSite() {SiteDeploy(gcs).publish()}
     fun publishNode() {NodeDeploy(gcs).publish()}
+    fun publishNodeStatic() {NodeDeployStatic(gcs).publish()}
 }

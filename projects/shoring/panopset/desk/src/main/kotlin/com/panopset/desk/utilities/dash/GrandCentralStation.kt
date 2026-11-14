@@ -60,12 +60,18 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
             val deployment = Deployment(this)
             deployment.publishNode()
         }, "Node", false, "Publish node website.")
+    val publishNodeStaticBtn = PanComponentFactory.createPanButton(fxDoc,
+        {
+            val deployment = Deployment(this)
+            deployment.publishNodeStatic()
+        }, "Node Static", false, "Publish node website direct to /var/www/${this.createRemoteHostData().d}/html/.")
     fun disablePublishButtons() {
         publishRawBtn.isDisable = true
         publishDownloadsBtn.isDisable = true
         publishBeamBtn.isDisable = true
         publishSiteBtn.isDisable = true
         publishNodeBtn.isDisable = true
+        publishNodeStaticBtn.isDisable = true
     }
     fun updateOutput() {
         disablePublishButtons()
