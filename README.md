@@ -43,7 +43,8 @@ Once everything is set up, then you can update and build:
 | ./clean.sh  | clean.cmd  | Clean target directories.                   |
 | ./update.sh | update.cmd | Git update.                                 |
 | ./build.sh  | build.cmd  | Build desktop and beam.                     |
-| ./jpk.sh    | jpk.cmd    | Create an installer for this platform       |
+| ./jpk.sh    | jpk.cmd    | Create an installer for this platform.       |
+| ./generateVersion.sh| N/A | Only run on the Linux platform, prepare next veraion. | 
 
 ## Requirements:
 
