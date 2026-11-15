@@ -15,6 +15,9 @@ class GenerateDownloadsTable(
     val projectDir =
         File(gcs.projectDirectorySelector.inputFile.text).name
 
+
+    val projectBaseDir = gcs.projectDirectorySelector.createDir()
+
     fun createDownloadsTable(path: String): String {
         val deployPropsFile = File(Fileop.combinePaths(projectDir, "deploy.properties"))
         val deployProps = Propop.load(deployPropsFile)
@@ -25,7 +28,7 @@ class GenerateDownloadsTable(
         for ((_, value) in platformDownloadMap) {
             val platformName = value.platformName
             val platformPropertiesFileName = "app$platformName.properties"
-            val propsFile = File(Fileop.combinePaths(projectDir, platformPropertiesFileName))
+            val propsFile = File(Fileop.combinePaths(projectBaseDir, platformPropertiesFileName))
             val props = Propop.load(propsFile)
             val platformFullName = props.getProperty("PLATFORM_NAME").replace("\"", "")
             val launchPath = props.getProperty("LAUNCH_PATH").replace("\"", "")
