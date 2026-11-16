@@ -19,7 +19,7 @@ class GenerateDownloadsTable(
     val projectBaseDir = gcs.projectDirectorySelector.createDir()
 
     fun createDownloadsTable(path: String): String {
-        val deployPropsFile = File(Fileop.combinePaths(projectDir, "deploy.properties"))
+        val deployPropsFile = File(Fileop.combinePaths(projectBaseDir, "deploy.properties"))
         val deployProps = Propop.load(deployPropsFile)
         val sampleApp = deployProps["SPLAPP"]
         val platformDownloadMap = createPlatformDownloadMap(path)
