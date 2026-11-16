@@ -12,7 +12,7 @@ class NodeDeploy(val gcs: GrandCentralStation) {
     val d = rhd.d
     val u = rhd.u
     val projectBaseDir = gcs.projectDirectorySelector.createDir()
-    val projectName = gcs.lorpProjectDir()
+    val projectName = gcs.determineProjectName()
 
     fun publish() {
         generateServiceFile()

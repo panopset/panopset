@@ -17,17 +17,19 @@ class SiteDeploy(val gcs: GrandCentralStation) {
     val d = rhd.d
 
     fun publish() {
-        val projectName = gcs.lorpProjectDir()
+        val projectName = gcs.determineProjectName()
         val projectBaseDir = gcs.projectDirectorySelector.createDir()
+        val tmpDir = File(projectBaseDir, "tmp")
         val tmpDownloadsDir = File(Fileop.combinePaths(
-            projectBaseDir,
-            "/tmp/downloads"
+            tmpDir,
+            "/downloads"
         ))
         val tmpHtmlDir = File(Fileop.combinePaths(
-            projectBaseDir,
-            "/tmp/html"
+            tmpDir,
+            "/html"
         ))
         val fromScp = "/var/www/$d/html/downloads"
+        Fileop.clear(tmpDir)
         opSecureCopyGet(
             rhd, tmpDownloadsDir, fromScp, arrayListOf("json")
         )

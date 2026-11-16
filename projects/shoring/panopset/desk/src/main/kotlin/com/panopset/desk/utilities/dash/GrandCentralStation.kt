@@ -96,7 +96,7 @@ class GrandCentralStation(val fxDoc: FxDoc, val osInfoMap: Map<String, String>) 
         }
     }
 
-    fun lorpProjectDir(): String {
+    fun determineProjectName(): String {
         val rtn = File(projectDirectorySelector.inputFile.text).name
         return rtn;
     }

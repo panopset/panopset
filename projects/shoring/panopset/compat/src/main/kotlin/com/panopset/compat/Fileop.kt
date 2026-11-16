@@ -198,6 +198,17 @@ object Fileop {
         }
     }
 
+    fun clear(dir: File) {
+        if (dir.isDirectory) {
+            val files = dir.listFiles()
+            if (files != null) {
+                for (f in files) {
+                    delete( f)
+                }
+            }
+        }
+    }
+
     fun mkdirs(path: File) {
         if (!path.mkdirs()) {
             Logz.errorMsg("${Nls.xlate("Unable to create path to")},${getCanonicalPath(path)}")

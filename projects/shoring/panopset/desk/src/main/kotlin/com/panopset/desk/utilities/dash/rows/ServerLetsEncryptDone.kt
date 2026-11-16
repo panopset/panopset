@@ -9,7 +9,7 @@ class ServerLetsEncryptDone(gcs: GrandCentralStation): Report(gcs) {
     val h = rhd.h
     val u = rhd.u
     val d = rhd.d
-    val projectName = gcs.lorpProjectDir()
+    val projectName = gcs.determineProjectName()
     val si = ServerInfo(gcs)
 
     override fun updateOutput() {

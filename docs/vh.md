@@ -6,6 +6,10 @@ Not all versions listed, just those with enhancements or bug fixes worth noting 
 The dates are when the release was started. If downloaded from the preview site, panopset.net, they could be out of
 date later; panopset.com always has the final release.
 
+## 1.7.3 (2026.11.14)
+* Dependency updates.
+* When running dash site deployment, clear the tmp directory first.
+
 ## 1.7.0 (2025.12.29)
 * Blackjack moved to fas21.com.
 * panopset.jar deprecated, in favor of platform specific standalone zip files.
