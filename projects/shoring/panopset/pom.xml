@@ -8,7 +8,7 @@
     <version>1.7.3</version>
     <properties>
         <!--
-        Also update deploy.properties.
+        Also update deploy.properties, and ../fas21/projects/shoring/fas12/pom.xml.
         -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

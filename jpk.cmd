@@ -32,6 +32,7 @@ set c=jpackage ^
   --copyright "1996-2026 Karl Dinwiddie" ^
   --license-file LICENSE ^
   --description "Panopset desktop applications." ^
+  --add-modules java.base,jdk.httpserver ^
   --add-launcher version=launchers/version.properties ^
   --add-launcher dash=launchers/dash.properties ^
   --add-launcher gi=launchers/gi.properties ^
@@ -57,6 +58,7 @@ set c=jpackage ^
 --vendor "Panopset" ^
 --copyright "1996-2026 Karl Dinwiddie" ^
 --description "Panopset desktop applications." ^
+--add-modules java.base,jdk.httpserver ^
 --add-launcher version=launchers/version.properties ^
 --add-launcher dash=launchers/dash.properties ^
 --add-launcher gi=launchers/gi.properties ^
