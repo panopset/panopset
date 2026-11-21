@@ -13,14 +13,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>25</java.version>
-        <kotlin.version>2.4.0</kotlin.version>
+        <kotlin.version>2.4.21</kotlin.version>
         <dokka.version>2.2.0</dokka.version>
-        <fx.v>28-ea+6</fx.v>
-        <jackson.v>3.2.2</jackson.v>
-        <jackson.annotations.v>2.22</jackson.annotations.v>
-        <jsch.version>2.28.7</jsch.version>
-        <zt.version>1.18.3</zt.version>
-        <slf4j.version>2.0.18</slf4j.version>
+        <fx.v>28-ea+12</fx.v>
+        <jackson.annotations.v>2.23</jackson.annotations.v>
+        <jackson.v>3.3.0</jackson.v>
+        <jsch.version>2.28.8</jsch.version>
+        <slf4j.version>2.0.20</slf4j.version>
+        <zt.version>1.18.2</zt.version>
         <maven.compiler.version>3.15.0</maven.compiler.version>
         <junit.version>6.0.3</junit.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
