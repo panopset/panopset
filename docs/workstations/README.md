@@ -15,3 +15,10 @@ For workstations, we have multiple flavors of Linux, and the two main propriety 
 If your JDK does not have a jmods directory, you may get it from 
 [gluonhq.com/products/javafx](https://gluonhq.com/products/javafx/).
 Select jmods in the type dropdown.
+
+# Git
+
+One time setup:
+
+    git config --global user.name (your name)
+    git config --global user.email (your email)
