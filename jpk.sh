@@ -3,6 +3,11 @@ if [[ -z "${JAVA_HOME}" ]]; then
 echo "JAVA_HOME is not defined, exiting."
 exit 1
 fi
+if [[ ! -d "${JAVA_HOME}/jmods" ]]; then
+echo "No JDK modules found: ${JAVA_HOME}/jmods is missing."
+echo "JAVA_HOME must point to a complete JDK installation containing jmods."
+exit 1
+fi
 echo "Packaging apps for ${OSTYPE}..."
 source deploy.properties
 
@@ -61,6 +66,7 @@ export c="jpackage \
   --copyright '1996-2026 Karl Dinwiddie' \
   --license-file LICENSE \
   --description 'Panopset desktop applications.' \
+  --add-modules java.base,jdk.httpserver \
   --add-launcher version=launchers/version.properties \
   --add-launcher dash=launchers/dash.properties \
   --add-launcher gi=launchers/gi.properties \
@@ -84,6 +90,7 @@ export c="jpackage \
   --vendor 'Panopset' \
   --copyright '1996-2026 Karl Dinwiddie' \
   --description 'Panopset desktop applications.' \
+  --add-modules java.base,jdk.httpserver \
   --add-launcher version=launchers/version.properties \
   --add-launcher dash=launchers/dash.properties \
   --add-launcher gi=launchers/gi.properties \
