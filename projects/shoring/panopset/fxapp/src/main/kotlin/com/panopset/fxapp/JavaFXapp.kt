@@ -176,7 +176,7 @@ object JavaFXapp {
         contentBorderPane.bottom = licenceLink
         contentTextArea.isEditable = false
         val stage = alert.dialogPane.scene.window as Stage
-        stage.icons.add(dds!!.createFaviconImage())
+        stage.icons.add(dds.createFaviconImage())
         stage.scene.root.style = fxDoc.scene.root.style
         alert.dialogPane.setPrefSize(600.0, 400.0);
         alert.dialogPane.headerText = appDisplayName
