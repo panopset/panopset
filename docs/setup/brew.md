@@ -26,6 +26,12 @@ Verify:
     Default locale: en_US, platform encoding: UTF-8
     OS name: "linux", version: "6.14.0-37-generic", arch: "amd64", family: "unix"
 
+Next add the following to ~/.bashrc on Linux or ~/.zprofile on Mac:
+
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    export JAVA_HOME=/home/linuxbrew/.linuxbrew/opt/openjdk/libexec
+
+
 ---
 
 Next thing to do is to make sure you can talk to your servers, by configuring [ssh](ssh.md).
