@@ -37,7 +37,7 @@ class DownloadsDeploy(val gcs: GrandCentralStation) {
         if (fromScpFile.exists()) {
             Platform.runLater {
                 opSecureCopyPut(rhd, fromScp, toScp,
-                    arrayListOf(skipDirectory))
+                    arrayListOf(skipDirectory), true)
             }
         } else {
             Logz.errorMsg("Could not find ${fromScpFile.absolutePath}")

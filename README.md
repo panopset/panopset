@@ -46,6 +46,15 @@ Once everything is set up, then you can update and build:
 | ./jpk.sh    | jpk.cmd     | Create an installer for this platform.            |
 | ./generateVersion.sh| Linux only. | Prepare next version, based on deploy.properties. | 
 
+### CI
+
+Once a deployment is complete, prepare the next version.
+
+* Update deploy.properties PV (Panopset Version) to the next release number.
+* Run (Linux or Mac only):
+
+    ./generateVersion.sh
+
 ## Requirements:
 
 * [Java 25](https://adoptium.net/temurin/releases).

@@ -34,13 +34,21 @@ private class SshClient(val session: Session, val channelSftp: ChannelSftp) {
         downloadDirectory(canonicalLocalDirectory, remoteDirectoryPath, normalizedExtensions)
     }
 
+
     fun put(localPath: String, remotePath: String, skipDirectories: List<String>) {
+        put(localPath, remotePath, skipDirectories, false)
+    }
+
+    fun put(localPath: String, remotePath: String, skipDirectories: List<String>, isClearRemotePathFirst: Boolean) {
         channelSftp.connect(5000)
         val localFile = File(localPath).canonicalFile
         require(localFile.exists()) { "Local path not found: ${localFile.path}" }
         if (localFile.isDirectory) {
             if (skipDirectories.isNotEmpty() && skipDirectories.contains(localFile.name)) {
                 return
+            }
+            if (isClearRemotePathFirst) {
+                channelSftp.rm("$remotePath/*")
             }
             putDirectory(localFile, remotePath, skipDirectories)
         } else {
@@ -158,14 +166,19 @@ fun opSecureCopyGet(
     }
 }
 
-fun opSecureCopyPut(rhd: RemoteHostData, localPath: String, remotePath: String, skipDirectories: List<String>) {
+fun opSecureCopyPut(rhd: RemoteHostData, localPath: String, remotePath: String, skipDirectories: List<String>,
+                    isClearRemotePathFirst: Boolean) {
     val sshClient = createSshClient(rhd)
     try {
-        sshClient.put(localPath, remotePath, skipDirectories)
+        sshClient.put(localPath, remotePath, skipDirectories, isClearRemotePathFirst)
         Logz.dspmsg("$localPath sent to $remotePath")
     } finally {
         sshClient.disconnect()
     }
+}
+
+fun opSecureCopyPut(rhd: RemoteHostData, localPath: String, remotePath: String, skipDirectories: List<String>) {
+    opSecureCopyPut(rhd, localPath, remotePath, skipDirectories, false)
 }
 
 fun opSecureCopyPut(rhd: RemoteHostData, localPath: String, remotePath: String) {
