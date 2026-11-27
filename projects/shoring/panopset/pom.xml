@@ -5,7 +5,7 @@
     <groupId>com.panopset</groupId>
     <artifactId>shoring</artifactId>
     <packaging>pom</packaging>
-    <version>1.7.3</version>
+    <version>1.7.4</version>
     <properties>
         <!--
         Also update deploy.properties, and ../fas21/projects/shoring/fas12/pom.xml.
